@@ -1,6 +1,8 @@
 package com.example.trabalhofinal
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -15,6 +17,8 @@ class CriarConta : AppCompatActivity() {
         val btnCriarConta = findViewById<Button>(R.id.btnCriarContaFinal)
         btnCriarConta.setOnClickListener {
             processarCriarConta()
+            // Adicione a animação de clique
+            it.startAnimation(AnimationUtils.loadAnimation(this, R.anim.button_click_animation))
         }
     }
 
@@ -38,9 +42,15 @@ class CriarConta : AppCompatActivity() {
             //aqui colocas o caralho dos dados para enviar para a merda da API
 
             Toast.makeText(this, "Conta criada com sucesso!", Toast.LENGTH_SHORT).show()
+            abrirMain()
         } else {
             // Se algum campo estiver vazio, exibir uma mensagem de erro
             Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show()
         }
+    }
+    //função que faz com que vá para o menu inicial da app(main)
+    private fun abrirMain(){
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
     }
 }

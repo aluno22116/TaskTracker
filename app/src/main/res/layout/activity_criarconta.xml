@@ -18,7 +18,8 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        />
 
     <EditText
         android:id="@+id/editTextNome"
@@ -29,7 +30,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageViewBackground"
         app:layout_constraintVertical_bias="0.078"
-        tools:layout_editor_absoluteX="0dp" />
+        tools:layout_editor_absoluteX="0dp"
+        android:background="@drawable/input_bg"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"/>
 
     <EditText
         android:id="@+id/editTextApelido"
@@ -41,7 +47,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageViewBackground"
         app:layout_constraintVertical_bias="0.169"
-        tools:layout_editor_absoluteX="0dp" />
+        tools:layout_editor_absoluteX="0dp"
+        android:background="@drawable/input_bg"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"/>
 
     <EditText
         android:id="@+id/editTextUsername"
@@ -53,7 +64,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageViewBackground"
         app:layout_constraintVertical_bias="0.244"
-        tools:layout_editor_absoluteX="0dp" />
+        tools:layout_editor_absoluteX="0dp"
+        android:background="@drawable/input_bg"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"/>
 
     <EditText
         android:id="@+id/editTextEmail"
@@ -65,7 +81,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageViewBackground"
         app:layout_constraintVertical_bias="0.33"
-        tools:layout_editor_absoluteX="0dp" />
+        tools:layout_editor_absoluteX="0dp"
+        android:background="@drawable/input_bg"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"/>
 
     <EditText
         android:id="@+id/editTextPassword"
@@ -77,7 +98,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageViewBackground"
         app:layout_constraintVertical_bias="0.444"
-        tools:layout_editor_absoluteX="0dp" />
+        tools:layout_editor_absoluteX="0dp"
+        android:background="@drawable/input_bg"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"/>
 
     <Button
         android:id="@+id/btnCriarContaFinal"
@@ -94,5 +120,6 @@
         app:layout_constraintTop_toTopOf="@+id/imageViewBackground"
         app:layout_constraintVertical_bias="0.556"
         tools:ignore="HardcodedText" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
