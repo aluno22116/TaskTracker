@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?                   >
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="CustomCalendarStyle" parent="Widget.MaterialComponents.MaterialCalendar">
         <item name="android:dateTextAppearance">@style/CustomDateTextAppearance</item>
@@ -18,7 +18,6 @@
         <item name="android:textColor">#000000</item> <!-- Cor preta para o texto do título (mês/ano) -->
     </style>
     <style name="barradecima" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- ... outras configurações ... -->
         <item name="windowActionBar">true</item>
         <item name="windowNoTitle">true</item>
         <item name="android:statusBarColor">#000000</item>

@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 
 class CriarConta : AppCompatActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+     fun onCreaten(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_criarconta)
 
