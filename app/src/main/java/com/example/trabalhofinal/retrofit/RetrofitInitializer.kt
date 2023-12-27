@@ -2,7 +2,7 @@ package com.example.trabalhofinal.retrofit
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.example.trabalhofinal.retrofit.service.TaskService
+import com.example.trabalhofinal.retrofit.service.Service
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -17,5 +17,5 @@ class RetrofitInitializer {
         .addConverterFactory(GsonConverterFactory.create(gson))
         .build()
 
-    fun taskService() = retrofit.create(TaskService::class.java)
+    fun service() = retrofit.create(Service::class.java)
 }
