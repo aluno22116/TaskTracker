@@ -8,7 +8,6 @@
     android:backgroundTint="@color/black"
     tools:context=".Calendario">
 
-
     <ImageView
         android:id="@+id/imageViewBackground"
         android:layout_width="0dp"
@@ -33,12 +32,24 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"/>
 
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="X"
+            android:layout_gravity="right"/>
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_gravity="left"
+            android:text="Guardar"/>
+
         <EditText
             android:id="@+id/caixaTextoCalendar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:hint="Faça as  suas anotações aqui"
+            android:hint="Faça as suas anotações aqui"
             android:background="@drawable/input_bg"
             android:paddingLeft="20dp"
             android:paddingTop="10dp"
