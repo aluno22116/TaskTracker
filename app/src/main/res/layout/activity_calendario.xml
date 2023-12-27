@@ -32,17 +32,27 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"/>
 
-        <Button
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:text="X"
-            android:layout_gravity="right"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="end">
 
-        <Button
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:layout_gravity="left"
-            android:text="Guardar"/>
+            <Button
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                app:icon="@drawable/saveicon"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                app:iconSize="32dp"
+                />
+
+            <Button
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                app:icon="@drawable/delete2"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                app:iconSize="32dp"/>
+        </LinearLayout>
 
         <EditText
             android:id="@+id/caixaTextoCalendar"

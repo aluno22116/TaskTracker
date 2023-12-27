@@ -17,7 +17,7 @@ import retrofit2.Response
 
 class CriarConta : AppCompatActivity() {
 
-     override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_criarconta)
 
@@ -29,7 +29,7 @@ class CriarConta : AppCompatActivity() {
         }
     }
 
-    fun processarCriarConta() {
+    private fun processarCriarConta() {
         // Obter referências para os EditTexts
         val editTextNome = findViewById<EditText>(R.id.editTextNome)
         val editTextApelido = findViewById<EditText>(R.id.editTextApelido)
@@ -46,45 +46,55 @@ class CriarConta : AppCompatActivity() {
 
         // Verificar se todos os campos estão preenchidos
         if (nome.isNotEmpty() && apelido.isNotEmpty() && username.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()) {
-            //aqui colocas o caralho dos dados para enviar para a merda da API
+            // Verificar o formato do e-mail
+            if (validaEmail(email)) {
+                // Continuar com o processamento
+                val utilizador = User(null, nome, apelido, username, email, password)
+                val user = UserRequest(utilizador)
+                val call = RetrofitInitializer().service().addUser(user)
 
-            val utilizador =  User(null,nome, apelido, username, email, password);
-            val user = UserRequest(utilizador);
-            val call = RetrofitInitializer().service().addUser(user)
-
-            call.enqueue(object : Callback<UserRequest?> {
-                override fun onResponse(call: Call<UserRequest?>, response: Response<UserRequest?>) {
-                    if (response.isSuccessful) {
-                        // A requisição foi bem-sucedida, processar a resposta se necessário
-                        val userResponse = response.body()
-                        if (response.code()==200) {
-                            if (userResponse != null) {
-                                Log.e("Novo usuário adicionado", userResponse.user.toString())
+                call.enqueue(object : Callback<UserRequest?> {
+                    override fun onResponse(call: Call<UserRequest?>, response: Response<UserRequest?>) {
+                        if (response.isSuccessful) {
+                            // A requisição foi bem-sucedida, processar a resposta se necessário
+                            val userResponse = response.body()
+                            if (response.code() == 200) {
+                                if (userResponse != null) {
+                                    Log.e("Novo usuário adicionado", userResponse.user.toString())
+                                }
                             }
+                        } else {
+                            // A requisição falhou, verificar o código de resposta e tratar conforme necessário
+                            Log.e("Falha na adição de usuário", "Código de resposta: ${response.code()}")
                         }
-                    } else {
-                        // A requisição falhou, verificar o código de resposta e tratar conforme necessário
-                        Log.e("Falha na adição de usuário", "Código de resposta: ${response.code()}")
                     }
-                }
 
-                override fun onFailure(call: Call<UserRequest?>, t: Throwable) {
-                    // Ocorreu uma falha na chamada à API, tratar conforme necessário
-                    t.printStackTrace()
-                    t.message?.let { Log.e("Falha na Chamada à API", it) }
-                }
-            })
+                    override fun onFailure(call: Call<UserRequest?>, t: Throwable) {
+                        // Ocorreu uma falha na chamada à API, tratar conforme necessário
+                        t.printStackTrace()
+                        t.message?.let { Log.e("Falha na Chamada à API", it) }
+                    }
+                })
 
-            Toast.makeText(this, "Conta criada com sucesso!", Toast.LENGTH_SHORT).show()
-            abrirMain()
+                Toast.makeText(this, "Conta criada com sucesso!", Toast.LENGTH_SHORT).show()
+                abrirMain()
+            } else {
+                // Exiba uma mensagem de erro informando que o formato do e-mail é inválido
+                Toast.makeText(this, "Formato de e-mail inválido", Toast.LENGTH_SHORT).show()
+            }
         } else {
             // Se algum campo estiver vazio, exibir uma mensagem de erro
             Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show()
         }
     }
-    //função que faz com que vá para o menu inicial da app(main)
-    private fun abrirMain(){
+
+    // Função que faz com que vá para o menu inicial da app (main)
+    private fun abrirMain() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
+    }
+    private fun validaEmail(email: String): Boolean {
+        val emailRegex = Regex("[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")
+        return emailRegex.matches(email)
     }
 }
