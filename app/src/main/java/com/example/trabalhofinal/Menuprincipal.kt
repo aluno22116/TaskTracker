@@ -47,7 +47,7 @@ class Menuprincipal : AppCompatActivity() {
         startActivity(intent)
     }
     private fun abrirBNotas(){
-        val intent = Intent(this, BNotas::class.java)
+        val intent = Intent(this, Bnotas::class.java)
         startActivity(intent)
     }
     private fun abrirTarefas(){
