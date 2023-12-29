@@ -26,3 +26,4 @@ class BDNotas(context: Context?) :
                 COLUMN_NOTE + " TEXT);"
     }
 }
+

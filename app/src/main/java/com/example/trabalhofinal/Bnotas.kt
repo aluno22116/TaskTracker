@@ -1,4 +1,5 @@
 package com.example.trabalhofinal
+
 import android.content.Intent
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
@@ -23,7 +24,14 @@ class Bnotas : AppCompatActivity() {
         // Exibindo notas existentes
         exibirNotas()
 
-        btnCreateNote.setOnClickListener { startActivity(Intent(this@Bnotas, CriarNotas::class.java)) }
+        btnCreateNote.setOnClickListener {
+            startActivity(
+                Intent(
+                    this@Bnotas,
+                    CriarNotas::class.java
+                )
+            )
+        }
     }
 
     private fun exibirNotas() {
@@ -52,3 +60,4 @@ class Bnotas : AppCompatActivity() {
         textViewNotes.text = notesText.toString()
     }
 }
+

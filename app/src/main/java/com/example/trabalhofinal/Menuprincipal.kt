@@ -46,7 +46,7 @@ class Menuprincipal : AppCompatActivity() {
         val intent = Intent(this, Perfil::class.java)
         startActivity(intent)
     }
-    private fun abrirBNotas(){
+    public fun abrirBNotas(){
         val intent = Intent(this, Bnotas::class.java)
         startActivity(intent)
     }

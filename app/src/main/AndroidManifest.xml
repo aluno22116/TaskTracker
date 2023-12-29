@@ -38,6 +38,9 @@
         <activity
             android:name=".CriarNotas"
             android:exported="false"/>
+
+        <activity android:name=".Bnotas"
+            android:exported="false"/>
         <activity
             android:name=".Tarefas"
             android:exported="false" />
@@ -46,9 +49,6 @@
             android:exported="false" />
         <activity
             android:name=".Calendario"
-            android:exported="false" />
-        <activity
-            android:name=".Bnotas"
             android:exported="false" />
         <activity
             android:name=".CriarConta"
