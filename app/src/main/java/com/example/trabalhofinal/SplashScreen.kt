@@ -7,13 +7,15 @@ import android.os.Looper
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
-class SplashActivity : AppCompatActivity() {
+class SplashScreen : AppCompatActivity() {
 
     private lateinit var splashText: TextView
     private val textToDisplay = "TaskTracker"
     private var currentIndex = 0
 
-    private val delayMillis: Long = 200 // Tempo de atraso entre cada letra em milissegundos
+    // Ajuste o delayMillis e durationMillis conforme necessário
+    private val delayMillis: Long = 100 // Tempo de atraso entre cada letra em milissegundos
+    private val durationMillis: Long = 1000// Duração total da animação em milissegundos
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +38,9 @@ class SplashActivity : AppCompatActivity() {
                     animateText()
                 }, delayMillis)
             } else {
-                startNextActivity()
+                Handler(Looper.getMainLooper()).postDelayed({
+                    startNextActivity()
+                }, durationMillis - currentIndex * delayMillis) // Ajuste do tempo total com base no número de letras
             }
         }
     }

@@ -24,7 +24,7 @@
         tools:targetApi="34">
 
         <activity
-            android:name=".SplashActivity"
+            android:name=".SplashScreen"
             android:exported="true"
             android:theme="@style/AppTheme.NoActionBar">
 

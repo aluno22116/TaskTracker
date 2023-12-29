@@ -1,6 +1,8 @@
 package com.example.trabalhofinal
 
 import android.content.ContentValues
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -32,10 +34,13 @@ class CriarNotas : AppCompatActivity() {
         val newRowId = db.insert(BDNotas.TABLE_NOTES, null, values)
         if (newRowId != -1L) {
             Toast.makeText(this, "Nota salva com sucesso!", Toast.LENGTH_SHORT).show()
-            val Menuprincipal = Menuprincipal()  // Substitua 'OutraClasse' pelo nome real da sua outra classe
-            Menuprincipal.abrirBNotas()
+            abrirBNotas(this)
         } else {
             Toast.makeText(this, "Erro ao salvar nota.", Toast.LENGTH_SHORT).show()
         }
     }
+}
+private fun abrirBNotas(context: Context) {
+    val intent = Intent(context, Bnotas::class.java)
+    context.startActivity(intent)
 }
