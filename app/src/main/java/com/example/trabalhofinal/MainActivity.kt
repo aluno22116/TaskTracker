@@ -1,6 +1,5 @@
 package com.example.trabalhofinal
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -14,9 +13,6 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.trabalhofinal.model.TokenJWT
-import com.example.trabalhofinal.model.User
-import com.example.trabalhofinal.model.UserRequest
 import com.example.trabalhofinal.model.UserResponse
 import com.example.trabalhofinal.retrofit.RetrofitInitializer
 import retrofit2.Call
@@ -28,8 +24,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-
         setupButtonListeners()
     }
 
@@ -124,7 +118,7 @@ class MainActivity : AppCompatActivity() {
                         if (matchedUser != null) {
                             // Usuário encontrado, faça o que precisa aqui
                             Log.i("INFO", "Usuário encontrado: $matchedUser")
-                            val intent1 = Intent(this@MainActivity, Menuprincipal::class.java)
+                            val intent1 = Intent(this@MainActivity, TesteMenu::class.java)
                             startActivity(intent1)
                         } else {
                             // Usuário não encontrado
@@ -132,7 +126,7 @@ class MainActivity : AppCompatActivity() {
                         }
                     } else {
 
-                        Log.e("Erro", "Lista de usuários nula.")
+                        Log.e("Erro", "Lista de usuários  nula.")
                     }
                 } else {
                     Log.e("Erro", "Erro na chamada à API: ${response.message()}")
