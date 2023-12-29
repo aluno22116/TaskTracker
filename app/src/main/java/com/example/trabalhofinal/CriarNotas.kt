@@ -18,12 +18,14 @@ class CriarNotas : AppCompatActivity() {
         setContentView(R.layout.activity_criarnotas)
 
         dbHelper = BDNotas(this)
-        val editTextNote = findViewById<EditText>(R.id.editarTexto)
+        val editarTexto = findViewById<EditText>(R.id.editarTexto)
+        val editarTitulo = findViewById<EditText>(R.id.editarTitulo)
         val btnSave = findViewById<Button>(R.id.btnSalvar)
         btnSave.setOnClickListener { view: View? ->
             salvarNotaNoBancoDeDados(
-                editTextNote.text.toString()
+                editarTexto.text.toString()
             )
+            editarTitulo.text.toString()
         }
     }
 

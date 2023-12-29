@@ -1,11 +1,15 @@
 package com.example.trabalhofinal
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import com.example.trabalhofinal.databinding.ActivityPerfilBinding
 
-class Perfil : AppCompatActivity() {
+class Perfil : TesteMenu() {
+    private lateinit var binding: ActivityPerfilBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_perfil)
+
+        binding = ActivityPerfilBinding.inflate(layoutInflater)
+        setContentView(binding.root)
     }
 }

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single" >
+        <item
+            android:id="@id/menu"
+            android:icon="@drawable/baseline_home_24"
+            android:title="Menu Principal"
+        />
+        <item
+            android:id="@+id/notas"
+            android:icon="@drawable/baseline_notes_24"
+            android:title="Bloco de Notas"
+            />
+        <item
+            android:id="@+id/tarefas"
+            android:icon="@drawable/baseline_task_24"
+            android:title="Tarefas"
+            />
+        <item
+            android:id="@+id/calendario"
+            android:icon="@drawable/baseline_calendar_month_24"
+            android:title="Calendario"
+            />
+        <item
+            android:id="@+id/perfil"
+            android:icon="@drawable/baseline_account_circle_24"
+            android:title="Perfil"
+            />
+        <item
+            android:id="@+id/definicoes"
+            android:icon="@drawable/baseline_settings_24"
+            android:title="Definições"
+            />
+
+    </group>
+</menu>
