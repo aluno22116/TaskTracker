@@ -21,10 +21,9 @@ interface Service {
     fun loginJWT(@Field("username") username: String?,
                  @Field("password") password: String?): Call<TokenJWT>
 
-    @POST("users")
-    fun addUser(@Body user: UserRequest): Call<UserRequest>
 
- //   @POST("users")
- //   fun addUser(@Header("Authorization") token: String, @Body user: UserRequest): Call<UserRequest>
+
+    @POST("users")
+    fun addUser(@Header("Authorization") token: String, @Body user: UserRequest): Call<UserRequest>
 
 }

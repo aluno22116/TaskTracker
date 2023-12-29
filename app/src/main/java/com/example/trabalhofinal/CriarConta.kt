@@ -51,7 +51,7 @@ class CriarConta : AppCompatActivity() {
                 // Continuar com o processamento
                 val utilizador = User(null, nome, apelido, username, email, password)
                 val user = UserRequest(utilizador)
-                val call = RetrofitInitializer().service().addUser(user)
+                val call = RetrofitInitializer().service().addUser("Bearer Tostas",user)
 
                 call.enqueue(object : Callback<UserRequest?> {
                     override fun onResponse(call: Call<UserRequest?>, response: Response<UserRequest?>) {

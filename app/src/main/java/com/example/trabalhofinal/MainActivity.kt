@@ -1,5 +1,6 @@
 package com.example.trabalhofinal
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -9,21 +10,26 @@ import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.trabalhofinal.model.TokenJWT
 import com.example.trabalhofinal.model.User
 import com.example.trabalhofinal.model.UserRequest
+import com.example.trabalhofinal.model.UserResponse
 import com.example.trabalhofinal.retrofit.RetrofitInitializer
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
-    lateinit var tokenJWT:String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
         setupButtonListeners()
     }
 
@@ -31,16 +37,21 @@ class MainActivity : AppCompatActivity() {
         val buttonIrMP = findViewById<Button>(R.id.btnIrParaMenuprincipal)
         val signupButton = findViewById<Button>(R.id.signupButton)
 
+
         // Adicionar animação de clique apenas para o btnIrParaMenuprincipal
         buttonIrMP.setOnClickListener {
             exibirImagemTemporariamente(buttonIrMP) {
-                irParaMenuprincipal()
+                loginJWT()
+                // Limpar os campos de input após o clique
+                limparCamposInput()
             }
         }
 
         signupButton.setOnClickListener {
             // Chamar a função abrirCriarConta() diretamente para o signupButton
             abrirCriarConta()
+            // Limpar os campos de input após o clique
+            limparCamposInput()
         }
     }
 
@@ -75,11 +86,6 @@ class MainActivity : AppCompatActivity() {
         button.startAnimation(clickAnimation)
     }
 
-    // Função que faz com que vá para o menu principal da app
-    private fun irParaMenuprincipal() {
-        val intent1 = Intent(this@MainActivity, Menuprincipal::class.java)
-        startActivity(intent1)
-    }
 
     // Função que faz com que vá para o menu criar conta da app
     private fun abrirCriarConta() {
@@ -87,71 +93,66 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent2)
     }
 
-    //FUNÇAO QUE REGISTA UM UTILIZADOR (ADAPTAR AO REGISTO)
-  //  private fun addUserApi() {
-  //      val utilizador =  User(null,"teste1", "teste1", "teste1", "teste1@teste.com", "teste123");
-  //      val user = UserRequest(utilizador);
-//
-  //      Log.e("Dados da Requisição", utilizador.toString())
-  //      val call = RetrofitInitializer().service().addUser(user)
-//
-  //      call.enqueue(object : Callback<UserRequest?> {
-  //          override fun onResponse(call: Call<UserRequest?>, response: Response<UserRequest?>) {
-  //              if (response.isSuccessful) {
-  //                  // A requisição foi bem-sucedida, processar a resposta se necessário
-  //                  val userResponse = response.body()
-  //                  if (response.code()==200) {
-  //                      if (userResponse != null) {
-  //                          Log.e("Novo usuário adicionado", userResponse.user.toString())
-  //                      }
-  //                  }
-  //              } else {
-  //                  // A requisição falhou, verificar o código de resposta e tratar conforme necessário
-  //                  Log.e("Falha na adição de usuário", "Código de resposta: ${response.code()}")
-  //              }
-  //          }
-//
-  //          override fun onFailure(call: Call<UserRequest?>, t: Throwable) {
-  //              // Ocorreu uma falha na chamada à API, tratar conforme necessário
-  //              t.printStackTrace()
-  //              t.message?.let { Log.e("Falha na Chamada à API", it) }
-  //          }
-  //      })
-  //  }
 
+    private fun loginJWT() {
+        val editTextUsername = findViewById<EditText>(R.id.usernameEditText)
+        val editTextPassword = findViewById<EditText>(R.id.passwordEditText)
 
-    //FUNCOES DE LOGIN (AINDA POR ADAPTAR)
-    private fun loginJWT(onTokenReceived: () -> Unit) {
-        val call = RetrofitInitializer().service().loginJWT("admin","admin")
-        call.enqueue(
-            object : Callback<TokenJWT> {
-                override fun onFailure(call: Call<TokenJWT>, t: Throwable) {
-                    t.printStackTrace()
-                    Log.e("Erro","Erro no login")
-                }
-                override fun onResponse(call: Call<TokenJWT>, response: Response<TokenJWT>) {
+        if (editTextUsername != null && editTextPassword != null) {
+            val username = editTextUsername.text.toString()
+            val password = editTextPassword.text.toString()
 
-                    tokenJWT = response.body()?.token.toString()
-                    Log.i("INFO",tokenJWT)
-                    onTokenReceived()
-                }
+            if (username.isNotEmpty() && password.isNotEmpty()) {
+                getUsersApi(username, password)
+            } else {
+                Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show()
             }
-        )
+        } else {
+            Log.e("Erro", "EditTexts não inicializados corretamente.")
+        }
     }
 
-    private fun loginJWT(username: String, password: String,  onResult: (TokenJWT?) -> Unit){
-        val call = RetrofitInitializer().service().loginJWT(username, password)
-        call.enqueue(
-            object : Callback<TokenJWT> {
-                override fun onFailure(call: Call<TokenJWT>, t: Throwable) {
-                    t.printStackTrace()
-                    onResult(null)
-                }
-                override fun onResponse(call: Call<TokenJWT>, response: Response<TokenJWT>) {
-                    val tokenResult = response.body()
-                    onResult(tokenResult)
+    private fun getUsersApi(username: String, password: String) {
+        val call = RetrofitInitializer().service().getUsers("Bearer Tostas")
+        call.enqueue(object : Callback<UserResponse> {
+            override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
+                if (response.isSuccessful) {
+                    val users = response.body()?.users
+                    if (users != null) {
+                        // Verificar se existe um usuário na lista com as credenciais fornecidas
+                        val matchedUser = users.find { it.username == username && it.password == password }
+                        if (matchedUser != null) {
+                            // Usuário encontrado, faça o que precisa aqui
+                            Log.i("INFO", "Usuário encontrado: $matchedUser")
+                            val intent1 = Intent(this@MainActivity, Menuprincipal::class.java)
+                            startActivity(intent1)
+                        } else {
+                            // Usuário não encontrado
+                            Toast.makeText(this@MainActivity, "Usuário não encontrado na lista.", Toast.LENGTH_SHORT).show()
+                        }
+                    } else {
+
+                        Log.e("Erro", "Lista de usuários nula.")
+                    }
+                } else {
+                    Log.e("Erro", "Erro na chamada à API: ${response.message()}")
                 }
             }
-        )
+
+            override fun onFailure(call: Call<UserResponse>, t: Throwable) {
+                t.printStackTrace()
+                Log.e("Erro", "Erro na chamada à API: ${t.message}")
+            }
+        })
     }
+
+    private fun limparCamposInput() {
+        val editTextUsername = findViewById<EditText>(R.id.usernameEditText)
+        val editTextPassword = findViewById<EditText>(R.id.passwordEditText)
+
+        editTextUsername.text.clear()
+        editTextPassword.text.clear()
+    }
+
+
 }
