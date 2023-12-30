@@ -1,11 +1,22 @@
 package com.example.trabalhofinal
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.trabalhofinal.databinding.ActivityPerfilBinding
+import com.google.android.material.navigation.NavigationView
 
-class Tarefas : AppCompatActivity() {
+class Tarefas : TesteMenu() {
+    private lateinit var binding: ActivityPerfilBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_tarefas)
+
+        binding = ActivityPerfilBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        // Se necessário, configure o NavigationView da classe Perfil
+        val navigationView: NavigationView = findViewById(R.id.nav_view)
+        navigationView.setNavigationItemSelectedListener { menuItem ->
+            handleMenuItemClick(menuItem.itemId)
+        }
     }
 }

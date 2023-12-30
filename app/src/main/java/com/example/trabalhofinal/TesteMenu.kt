@@ -33,20 +33,18 @@ open class TesteMenu : AppCompatActivity() {
         }
     }
 
-    private fun handleMenuItemClick(itemId: Int): Boolean {
-         when (itemId) {
+    public fun handleMenuItemClick(itemId: Int): Boolean {
+        val intent = when (itemId) {
             R.id.menu -> Intent(this, Menuprincipal::class.java)
             R.id.perfil -> Intent(this, Perfil::class.java)
             R.id.notas -> Intent(this, Bnotas::class.java)
             R.id.tarefas -> Intent(this, Tarefas::class.java)
-            R.id.definicoes -> Intent(this, Menuprincipal::class.java)
             R.id.calendario -> Intent(this, Calendario::class.java)
             else -> null
         }
 
         intent?.let {
             startActivity(it)
-            // Feche o DrawerLayout após a seleção do menu
             drawerLayout.closeDrawer(GravityCompat.START)
             return true
         }
@@ -68,11 +66,13 @@ open class TesteMenu : AppCompatActivity() {
             super.onBackPressed()
         }
     }
+
     fun openDrawer() {
         if (!drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.openDrawer(GravityCompat.START)
         }
     }
+
     fun closeDrawer() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START)

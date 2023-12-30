@@ -4,54 +4,72 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.animation.AnimationUtils
 import android.widget.Button
-import androidx.appcompat.app.AppCompatActivity
+import com.example.trabalhofinal.databinding.ActivityMenuprincipalBinding
+import com.google.android.material.navigation.NavigationView
 
-class Menuprincipal : AppCompatActivity() {
+class Menuprincipal : TesteMenu() {
+
+    private lateinit var binding: ActivityMenuprincipalBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_menuprincipal)
+
+        // Use o layout inflater apropriado para a atividade Menuprincipal
+        binding = ActivityMenuprincipalBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         setupButtonListeners()
+
+        // Configurar o NavigationView
+        val navigationView: NavigationView = findViewById(R.id.nav_view)
+        navigationView.setNavigationItemSelectedListener { menuItem ->
+            handleMenuItemClick(menuItem.itemId)
+        }
     }
 
-
-    private fun setupButtonListeners(){
+    private fun setupButtonListeners() {
         val buttonTarefas = findViewById<Button>(R.id.buttonTarefas)
         val buttonPerfil = findViewById<Button>(R.id.buttonPerfil)
         val buttonBNotas = findViewById<Button>(R.id.buttonBNotas)
         val buttonCalendario = findViewById<Button>(R.id.buttonCalendario)
 
-        buttonTarefas.setOnClickListener{
+        buttonTarefas.setOnClickListener {
             it.startAnimation(AnimationUtils.loadAnimation(this, R.anim.button_click_animation))
             abrirTarefas()
         }
-        buttonPerfil.setOnClickListener{
+        buttonPerfil.setOnClickListener {
             it.startAnimation(AnimationUtils.loadAnimation(this, R.anim.button_click_animation))
             abrirPerfil()
         }
-        buttonBNotas.setOnClickListener{
+        buttonBNotas.setOnClickListener {
             it.startAnimation(AnimationUtils.loadAnimation(this, R.anim.button_click_animation))
             abrirBNotas()
         }
-        buttonCalendario.setOnClickListener{
+        buttonCalendario.setOnClickListener {
             it.startAnimation(AnimationUtils.loadAnimation(this, R.anim.button_click_animation))
             abrirCalendario()
         }
     }
 
-    private fun abrirCalendario(){
+    private fun abrirCalendario() {
         val intent = Intent(this, Calendario::class.java)
         startActivity(intent)
     }
-    private fun abrirPerfil(){
+
+    private fun abrirPerfil() {
         val intent = Intent(this, Perfil::class.java)
         startActivity(intent)
     }
-    public fun abrirBNotas(){
+
+    private fun abrirBNotas() {
         val intent = Intent(this, Bnotas::class.java)
         startActivity(intent)
     }
-    private fun abrirTarefas(){
+
+    private fun abrirTarefas() {
         val intent = Intent(this, Tarefas::class.java)
         startActivity(intent)
     }
+
+    // Adicione outras funções necessárias
 }
