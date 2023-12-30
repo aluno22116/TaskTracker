@@ -44,11 +44,12 @@ open class TesteMenu : AppCompatActivity() {
         }
 
         intent?.let {
+            it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP) // Adiciona a flag para limpar as atividades no topo da pilha
             startActivity(it)
             drawerLayout.closeDrawer(GravityCompat.START)
+            finish() // Encerra a atividade atual
             return true
         }
-
         return false
     }
 

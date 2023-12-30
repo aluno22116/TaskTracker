@@ -1,7 +1,6 @@
 package com.example.trabalhofinal
 
 import android.content.ContentValues
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -13,11 +12,13 @@ import androidx.appcompat.app.AppCompatActivity
 
 class CriarNotas : AppCompatActivity() {
     private var dbHelper: BDNotas? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_criarnotas)
 
         dbHelper = BDNotas(this)
+
         val editarTexto = findViewById<EditText>(R.id.editarTexto)
         val editarTitulo = findViewById<EditText>(R.id.editarTitulo)
         val btnSave = findViewById<Button>(R.id.btnSalvar)
@@ -36,13 +37,17 @@ class CriarNotas : AppCompatActivity() {
         val newRowId = db.insert(BDNotas.TABLE_NOTES, null, values)
         if (newRowId != -1L) {
             Toast.makeText(this, "Nota salva com sucesso!", Toast.LENGTH_SHORT).show()
-            abrirBNotas(this)
+            abrirBNotas()
         } else {
             Toast.makeText(this, "Erro ao salvar nota.", Toast.LENGTH_SHORT).show()
         }
     }
-}
-private fun abrirBNotas(context: Context) {
-    val intent = Intent(context, Bnotas::class.java)
-    context.startActivity(intent)
+
+    private fun abrirBNotas() {
+        val intent = Intent(this, Bnotas::class.java)
+        startActivity(intent)
+
+        // Remove a atividade CriarNotas da pilha
+        finish()
+    }
 }

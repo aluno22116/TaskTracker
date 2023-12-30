@@ -42,6 +42,13 @@ class Bnotas : TesteMenu() {
         }
     }
 
+    override fun onBackPressed() {
+        val intent = Intent(this, MainActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        startActivity(intent)
+        finish()
+    }
+
     private fun exibirNotas() {
         val db: SQLiteDatabase = dbHelper.readableDatabase
         val projection = arrayOf(BDNotas.COLUMN_ID, BDNotas.COLUMN_NOTE)

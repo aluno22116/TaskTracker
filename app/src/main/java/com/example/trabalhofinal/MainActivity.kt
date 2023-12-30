@@ -34,20 +34,22 @@ class MainActivity : AppCompatActivity() {
 
         // Adicionar animação de clique apenas para o btnIrParaMenuprincipal
         buttonIrMP.setOnClickListener {
-            exibirImagemTemporariamente(buttonIrMP) {
-                loginJWT()
-                // Limpar os campos de input após o clique
-                limparCamposInput()
+            val intent1 = Intent(this@MainActivity, Menuprincipal::class.java)
+            startActivity(intent1)
+            //exibirImagemTemporariamente(buttonIrMP) {
+                // loginJWT()
+               // Limpar os campos de input após o clique
+               //limparCamposInput()
             }
         }
 
-        signupButton.setOnClickListener {
+       // signupButton.setOnClickListener {
             // Chamar a função abrirCriarConta() diretamente para o signupButton
-            abrirCriarConta()
+           // abrirCriarConta()
             // Limpar os campos de input após o clique
-            limparCamposInput()
-        }
-    }
+           // limparCamposInput()
+       // }
+    //}
 
     private fun exibirImagemTemporariamente(button: View, onComplete: () -> Unit) {
         val imagemExibida = findViewById<ImageView>(R.id.lapis)
