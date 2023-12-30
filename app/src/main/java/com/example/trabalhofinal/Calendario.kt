@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.widget.DatePicker
 import android.widget.EditText
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.navigation.NavigationView
 
-class Calendario : AppCompatActivity() {
+class Calendario : TesteMenu() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -14,6 +14,7 @@ class Calendario : AppCompatActivity() {
 
         val calendar = findViewById<DatePicker>(R.id.calendar)
         val caixaTextoCalendar = findViewById<EditText>(R.id.caixaTextoCalendar)
+
         // Configurar um Listener para o DatePicker
         calendar.init(calendar.year, calendar.month, calendar.dayOfMonth,
             DatePicker.OnDateChangedListener { _, year, monthOfYear, dayOfMonth ->
@@ -24,5 +25,11 @@ class Calendario : AppCompatActivity() {
                 // Habilitar a caixa de texto para anotações
                 caixaTextoCalendar.isEnabled = true
             })
+
+        // Configurar o NavigationView
+        val navigationView: NavigationView = findViewById(R.id.nav_view)
+        navigationView.setNavigationItemSelectedListener { menuItem ->
+            handleMenuItemClick(menuItem.itemId)
+        }
     }
 }

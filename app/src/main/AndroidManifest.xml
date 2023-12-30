@@ -52,7 +52,7 @@
         <activity
             android:name=".Menuprincipal"
             android:exported="false"
-            android:theme="@style/barradecima" />
+             />
         <activity
             android:name=".MainActivity"
             android:exported="true"
