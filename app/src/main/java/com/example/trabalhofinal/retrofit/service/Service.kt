@@ -1,5 +1,7 @@
 package com.example.trabalhofinal.retrofit.service
 
+import com.example.trabalhofinal.model.NoteRequest
+import com.example.trabalhofinal.model.NoteResponse
 import com.example.trabalhofinal.model.TokenJWT
 import com.example.trabalhofinal.model.UserRequest
 import com.example.trabalhofinal.model.UserResponse
@@ -15,6 +17,9 @@ interface Service {
     @GET("users")
     fun getUsers(@Header("Authorization") token: String): Call<UserResponse>
 
+    @GET("notes")
+    fun getNotes(@Header("Authorization") token: String): Call<NoteResponse>
+
 
     @FormUrlEncoded
     @POST("users")
@@ -25,5 +30,8 @@ interface Service {
 
     @POST("users")
     fun addUser(@Header("Authorization") token: String, @Body user: UserRequest): Call<UserRequest>
+
+    @POST("notes")
+    fun addUserNotes(@Header("Authorization") token: String, @Body note: NoteRequest): Call<NoteRequest>
 
 }

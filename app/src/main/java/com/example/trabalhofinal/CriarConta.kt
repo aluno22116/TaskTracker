@@ -8,6 +8,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.trabalhofinal.model.Note
+import com.example.trabalhofinal.model.NoteRequest
 import com.example.trabalhofinal.model.User
 import com.example.trabalhofinal.model.UserRequest
 import com.example.trabalhofinal.model.UserResponse
@@ -46,10 +48,14 @@ class CriarConta : AppCompatActivity() {
         if (nome.isNotEmpty() && apelido.isNotEmpty() && username.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()) {
             if (validaEmail(email)) {
                 val utilizador = User(null, nome, apelido, username, email, password)
+                val notas = Note(null, username,null)
                 val user = UserRequest(utilizador)
+                val notes = NoteRequest(notas)
 
+
+                //userNotes(username, notes, user)
                 // Verifica se o username já existe antes de tentar criar o usuário
-                getUsersApi(username, user)
+                getUsersApi(username, notes, user)
             } else {
                 Toast.makeText(this, "Formato de e-mail inválido", Toast.LENGTH_SHORT).show()
             }
@@ -58,7 +64,7 @@ class CriarConta : AppCompatActivity() {
         }
     }
 
-    private fun getUsersApi(username: String, user: UserRequest) {
+    private fun getUsersApi(username: String, note: NoteRequest, user: UserRequest) {
         val call = RetrofitInitializer().service().getUsers("Bearer Tostas")
         call.enqueue(object : Callback<UserResponse> {
             override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
@@ -70,8 +76,9 @@ class CriarConta : AppCompatActivity() {
                             // Usuário já existe, exibe uma mensagem de erro
                             Toast.makeText(this@CriarConta, "Username já existente. Insira outro username", Toast.LENGTH_SHORT).show()
                         } else {
-                            // Usuário não existe, prossegue com o registro
-                            realizarRegisto(user)
+                            userNotes(note, user)
+                            // Usuário não existe, prossegue com o registo
+                           // realizarRegisto(user)
                         }
                     } else {
                         Log.e("Erro", "Lista de usuários nula.")
@@ -87,6 +94,32 @@ class CriarConta : AppCompatActivity() {
             }
         })
     }
+
+    private fun userNotes(note: NoteRequest, user: UserRequest) {
+        // API call to add user notes
+        val notesCall = RetrofitInitializer().service().addUserNotes("Bearer Tostas", note)
+        notesCall.enqueue(object : Callback<NoteRequest> {
+            override fun onResponse(call: Call<NoteRequest>, response: Response<NoteRequest>) {
+                if (response.isSuccessful) {
+                    // Continue with the registration process or any other logic
+                    // Now, make another API call to add the user to a different worksheet
+                    realizarRegisto(user)
+                } else {
+                    Log.e("Erro", "Erro na chamada à API de notas: ${response.message()}")
+                    // Handle the error as needed
+                }
+            }
+
+            override fun onFailure(call: Call<NoteRequest>, t: Throwable) {
+                t.printStackTrace()
+                Log.e("Erro", "Erro na chamada à API de notas: ${t.message}")
+                // Handle the error as needed
+            }
+        })
+    }
+
+
+
 
     private fun realizarRegisto(user: UserRequest) {
         val call = RetrofitInitializer().service().addUser("Bearer Tostas", user)
@@ -114,6 +147,9 @@ class CriarConta : AppCompatActivity() {
             }
         })
     }
+
+
+
 
 
 
