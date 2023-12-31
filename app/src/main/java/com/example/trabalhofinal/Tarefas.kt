@@ -13,7 +13,6 @@ class Tarefas : TesteMenu() {
         binding = ActivityPerfilBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Se necessário, configure o NavigationView da classe Perfil
         val navigationView: NavigationView = findViewById(R.id.nav_view)
         navigationView.setNavigationItemSelectedListener { menuItem ->
             handleMenuItemClick(menuItem.itemId)

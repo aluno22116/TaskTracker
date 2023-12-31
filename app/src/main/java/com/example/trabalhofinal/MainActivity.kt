@@ -34,22 +34,20 @@ class MainActivity : AppCompatActivity() {
 
         // Adicionar animação de clique apenas para o btnIrParaMenuprincipal
         buttonIrMP.setOnClickListener {
-            val intent1 = Intent(this@MainActivity, Menuprincipal::class.java)
-            startActivity(intent1)
-            //exibirImagemTemporariamente(buttonIrMP) {
-                // loginJWT()
+            exibirImagemTemporariamente(buttonIrMP) {
+                 loginJWT()
                // Limpar os campos de input após o clique
-               //limparCamposInput()
+               limparCamposInput()
             }
         }
 
-       // signupButton.setOnClickListener {
-            // Chamar a função abrirCriarConta() diretamente para o signupButton
-           // abrirCriarConta()
+       signupButton.setOnClickListener {
+             //Chamar a função abrirCriarConta() diretamente para o signupButton
+            abrirCriarConta()
             // Limpar os campos de input após o clique
-           // limparCamposInput()
-       // }
-    //}
+            limparCamposInput()
+        }
+    }
 
     private fun exibirImagemTemporariamente(button: View, onComplete: () -> Unit) {
         val imagemExibida = findViewById<ImageView>(R.id.lapis)
@@ -120,7 +118,7 @@ class MainActivity : AppCompatActivity() {
                         if (matchedUser != null) {
                             // Usuário encontrado, faça o que precisa aqui
                             Log.i("INFO", "Usuário encontrado: $matchedUser")
-                            val intent1 = Intent(this@MainActivity, TesteMenu::class.java)
+                            val intent1 = Intent(this@MainActivity, Menuprincipal::class.java)
                             startActivity(intent1)
                         } else {
                             // Usuário não encontrado

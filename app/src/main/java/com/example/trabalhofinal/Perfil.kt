@@ -3,11 +3,11 @@ package com.example.trabalhofinal
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import androidx.core.app.ActivityCompat
@@ -78,8 +78,11 @@ class Perfil : TesteMenu() {
 
                 startActivityForResult(intent, ourRequestCode)
             }
+        } else {
+                Log.e("Camera", "Erro ao iniciar a câmera")
+            }
         }
-    }
+
 
     private fun criarArquivoImagem(): File {
         val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
@@ -98,10 +101,12 @@ class Perfil : TesteMenu() {
 
         if (requestCode == ourRequestCode && resultCode == RESULT_OK) {
             val imageView: ImageView = findViewById(R.id.fotografia)
-            val bitmap = data?.extras?.get("data") as? Bitmap
-            bitmap?.let {
-                imageView.setImageBitmap(it)
-            }
+
+            // Certifique-se de que a URI da foto está correta
+            val photoUri = Uri.fromFile(File(currentPhotoPath))
+
+            // Configurar a foto na ImageView
+            imageView.setImageURI(photoUri)
         }
     }
 
@@ -118,6 +123,4 @@ class Perfil : TesteMenu() {
             iniciarCamera()
         }
     }
-
-
 }

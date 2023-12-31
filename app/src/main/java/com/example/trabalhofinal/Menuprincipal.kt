@@ -32,6 +32,7 @@ class Menuprincipal : TesteMenu() {
         val buttonPerfil = findViewById<Button>(R.id.buttonPerfil)
         val buttonBNotas = findViewById<Button>(R.id.buttonBNotas)
         val buttonCalendario = findViewById<Button>(R.id.buttonCalendario)
+        val btnAbrirDrawer = findViewById<Button>(R.id.btnAbrirDrawer)
 
         buttonTarefas.setOnClickListener {
             it.startAnimation(AnimationUtils.loadAnimation(this, R.anim.button_click_animation))
@@ -48,6 +49,9 @@ class Menuprincipal : TesteMenu() {
         buttonCalendario.setOnClickListener {
             it.startAnimation(AnimationUtils.loadAnimation(this, R.anim.button_click_animation))
             abrirCalendario()
+        }
+        btnAbrirDrawer.setOnClickListener {
+            clicarAbrirDrawer()
         }
     }
 
@@ -71,5 +75,5 @@ class Menuprincipal : TesteMenu() {
         startActivity(intent)
     }
 
-    // Adicione outras funções necessárias
+
 }

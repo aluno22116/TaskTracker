@@ -20,11 +20,23 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center">
+
+        <Button
+            android:id="@+id/btnAbrirDrawer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="clicarAbrirDrawer"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
         <Button
             android:id="@+id/buttonCalendario"
@@ -33,8 +45,12 @@
             android:backgroundTint="@color/black"
             android:text="Calendário"
             android:textColor="@color/white"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.443" />
 
         <Button
             android:id="@+id/buttonBNotas"
@@ -44,7 +60,12 @@
             android:backgroundTint="@color/black"
             android:text="Bloco de Notas"
             android:textColor="@color/white"
-            android:layout_marginBottom="16dp" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.657" />
 
         <Button
             android:id="@+id/buttonTarefas"
@@ -53,7 +74,12 @@
             android:backgroundTint="@color/black"
             android:text="Tarefas"
             android:textColor="@color/white"
-            android:layout_marginBottom="16dp" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.553" />
 
         <Button
             android:id="@+id/buttonPerfil"
@@ -62,8 +88,13 @@
             android:backgroundTint="@color/black"
             android:text="Perfil"
             android:textColor="@color/white"
-            android:layout_marginBottom="100dp" />
-    </LinearLayout>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.78" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.navigation.NavigationView
         android:layout_width="wrap_content"

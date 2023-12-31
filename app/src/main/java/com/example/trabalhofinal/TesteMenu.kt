@@ -2,6 +2,7 @@ package com.example.trabalhofinal
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -27,10 +28,12 @@ open class TesteMenu : AppCompatActivity() {
         drawerLayout.addDrawerListener(drawerToggle)
         drawerToggle.syncState()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
+        
         navigationView.setNavigationItemSelectedListener { menuItem ->
             handleMenuItemClick(menuItem.itemId)
         }
+
+
     }
 
     public fun handleMenuItemClick(itemId: Int): Boolean {
@@ -59,24 +62,12 @@ open class TesteMenu : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
+    fun clicarAbrirDrawer() {
+        Log.d("MeuApp", "Clicou no botão Abrir Drawer")
 
-    override fun onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START)
-        } else {
-            super.onBackPressed()
-        }
-    }
-
-    fun openDrawer() {
         if (!drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.openDrawer(GravityCompat.START)
         }
     }
-
-    fun closeDrawer() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START)
-        }
     }
-}
+
