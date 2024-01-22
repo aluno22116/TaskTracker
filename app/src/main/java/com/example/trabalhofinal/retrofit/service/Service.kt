@@ -12,6 +12,8 @@ import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
+import retrofit2.http.PUT
+import retrofit2.http.Path
 
 interface Service {
     @GET("users")
@@ -19,6 +21,7 @@ interface Service {
 
     @GET("notes")
     fun getNotes(@Header("Authorization") token: String): Call<NoteResponse>
+
 
 
     @FormUrlEncoded
@@ -32,6 +35,25 @@ interface Service {
     fun addUser(@Header("Authorization") token: String, @Body user: UserRequest): Call<UserRequest>
 
     @POST("notes")
-    fun addUserNotes(@Header("Authorization") token: String, @Body note: NoteRequest): Call<NoteRequest>
+    fun createNoteSpace(@Header("Authorization") token: String, @Body note: NoteRequest): Call<NoteRequest>
+
+    @PUT("notes/{userId}")
+    fun updateNote(@Header("Authorization") token: String, @Path("userId") userId: String?, @Body updatedNote: NoteRequest): Call<NoteRequest>
+
+    @POST("notes/{userId}")
+    fun addUserNotes(@Header("Authorization") token: String, @Path("userId") userId: String, @Body notes: List<NoteRequest>): Call<List<NoteRequest>>
+
+
+        @PUT("notes/{userId}")
+        fun addOrUpdateNotes(@Header("Authorization") token: String, @Path("userId") userId: String, @Body notes: List<NoteRequest>): Call<List<NoteRequest>>
+
+
+
+  //  @GET("notes/{userId}")
+  //  fun getNotesBid(@Header("Authorization") token: String, @Path("userId") userId: String?, @Body getNotesBid: List<NoteRequest>): Call<List<NoteRequest>>
+
+
+  // @GET("notes/{userId}")
+  // fun getNotesBid(@Header("Authorization") token: String, @Path("userId") userId: String?): Call<List<NoteRequest>>
 
 }

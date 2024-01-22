@@ -97,7 +97,7 @@ class CriarConta : AppCompatActivity() {
 
     private fun userNotes(note: NoteRequest, user: UserRequest) {
         // API call to add user notes
-        val notesCall = RetrofitInitializer().service().addUserNotes("Bearer Tostas", note)
+        val notesCall = RetrofitInitializer().service().createNoteSpace("Bearer Tostas", note)
         notesCall.enqueue(object : Callback<NoteRequest> {
             override fun onResponse(call: Call<NoteRequest>, response: Response<NoteRequest>) {
                 if (response.isSuccessful) {
