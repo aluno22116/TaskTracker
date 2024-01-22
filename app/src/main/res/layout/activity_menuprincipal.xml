@@ -5,95 +5,68 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Menuprincipal">
-
-    <ImageView
-        android:id="@+id/imageViewBackground"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/capa"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+    tools:context=".Menuprincipal"
+    android:background="#00547F"
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:gravity="center">
+        android:gravity="center"
+        android:background="#002A40">
 
-        <Button
-            android:id="@+id/btnAbrirDrawer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="clicarAbrirDrawer"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:id="@+id/toolbar"
+            android:elevation="4dp"
+            android:background="#007FBF"
+            app:navigationIcon="@drawable/baseline_menu_24"
+            />
 
-        <Button
-            android:id="@+id/buttonCalendario"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/black"
-            android:text="Calendário"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.443" />
 
-        <Button
+        <FrameLayout
+            android:id="@+id/fragmento"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteX="86dp"
+            tools:layout_editor_absoluteY="-16dp" >
+
+
+            <Button
             android:id="@+id/buttonBNotas"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:backgroundTint="@color/black"
+                android:layout_marginTop="200dp"
+                android:layout_marginLeft="100dp"
+            android:backgroundTint="#00547F"
             android:text="Bloco de Notas"
             android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.657" />
+             />
+
 
         <Button
-            android:id="@+id/buttonTarefas"
+            android:id="@+id/buttonCriadores"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/black"
-            android:text="Tarefas"
+            android:backgroundTint="#00547F"
+            android:text="Criadores"
             android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.553" />
+            android:layout_marginTop="300dp"
+            android:layout_marginLeft="100dp"/>
 
         <Button
             android:id="@+id/buttonPerfil"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/black"
+            android:backgroundTint="#00547F"
             android:text="Perfil"
             android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.78" />
+            android:layout_marginTop="400dp"
+            android:layout_marginLeft="100dp"/>
+
+        </FrameLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.navigation.NavigationView

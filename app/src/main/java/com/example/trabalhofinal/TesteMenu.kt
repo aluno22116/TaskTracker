@@ -41,8 +41,6 @@ open class TesteMenu : AppCompatActivity() {
             R.id.menu -> Intent(this, Menuprincipal::class.java)
             R.id.perfil -> Intent(this, Perfil::class.java)
             R.id.notas -> Intent(this, Bnotas::class.java)
-            R.id.tarefas -> Intent(this, Tarefas::class.java)
-            R.id.calendario -> Intent(this, Calendario::class.java)
             else -> null
         }
 

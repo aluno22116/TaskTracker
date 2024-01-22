@@ -35,9 +35,11 @@ class MainActivity : AppCompatActivity() {
         // Adicionar animação de clique apenas para o btnIrParaMenuprincipal
         buttonIrMP.setOnClickListener {
             exibirImagemTemporariamente(buttonIrMP) {
-                 loginJWT()
+                 //loginJWT()
                // Limpar os campos de input após o clique
-               limparCamposInput()
+               //limparCamposInput()
+                val intent1 = Intent(this@MainActivity, Menuprincipal::class.java)
+                startActivity(intent1)
             }
         }
 
