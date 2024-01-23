@@ -48,7 +48,7 @@ class CriarConta : AppCompatActivity() {
         if (nome.isNotEmpty() && apelido.isNotEmpty() && username.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()) {
             if (validaEmail(email)) {
                 val utilizador = User(null, nome, apelido, username, email, password)
-                val notas = Note(null, username,null)
+                val notas = Note(null, username,null,null)
                 val user = UserRequest(utilizador)
                 val notes = NoteRequest(notas)
 

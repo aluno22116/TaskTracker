@@ -60,7 +60,7 @@ class CriarNotas : AppCompatActivity() {
     private fun updateNotes(userId: String) {
         val editarTexto = findViewById<EditText>(R.id.editarTexto)
         val textoNota = editarTexto.text.toString()
-        val nota = Note(null,null, textoNota)
+        val nota = Note(null,null, textoNota, null)
         val notes = NoteRequest(nota)
         val putCall = RetrofitInitializer().service().updateNote("Bearer Tostas", userId, notes)
         putCall.enqueue(object : Callback<NoteRequest> {

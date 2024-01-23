@@ -1,5 +1,6 @@
 package com.example.trabalhofinal.retrofit.service
 
+import com.example.trabalhofinal.model.Note
 import com.example.trabalhofinal.model.NoteRequest
 import com.example.trabalhofinal.model.NoteResponse
 import com.example.trabalhofinal.model.TokenJWT
@@ -40,8 +41,18 @@ interface Service {
     @PUT("notes/{userId}")
     fun updateNote(@Header("Authorization") token: String, @Path("userId") userId: String?, @Body updatedNote: NoteRequest): Call<NoteRequest>
 
-    @POST("notes/{userId}")
-    fun addUserNotes(@Header("Authorization") token: String, @Path("userId") userId: String, @Body notes: List<NoteRequest>): Call<List<NoteRequest>>
+
+
+
+
+
+
+
+
+   @POST("notes/{userId}")
+   fun addUserNotes(@Header("Authorization") token: String, @Path("userId") userId: String, @Body notes: List<NoteRequest>): Call<List<NoteRequest>>
+
+
 
 
         @PUT("notes/{userId}")

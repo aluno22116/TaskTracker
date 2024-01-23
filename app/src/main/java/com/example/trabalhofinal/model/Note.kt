@@ -6,6 +6,7 @@ data class Note(
     @SerializedName("id") val id: Int?,
     @SerializedName("username") val username: String?,
     @SerializedName("notas") val notas: String?,
+    @SerializedName("imagem") val imagem: String?,
 )
 
 data class NoteResponse(
