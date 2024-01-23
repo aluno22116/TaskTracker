@@ -39,8 +39,8 @@ open class TesteMenu : AppCompatActivity() {
     public fun handleMenuItemClick(itemId: Int): Boolean {
         val intent = when (itemId) {
             R.id.menu -> Intent(this, Menuprincipal::class.java)
-            R.id.perfil -> Intent(this, Perfil::class.java)
             R.id.notas -> Intent(this, Bnotas::class.java)
+            R.id.vamosver-> Intent(this, vamosver::class.java)
             else -> null
         }
 

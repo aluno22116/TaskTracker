@@ -12,20 +12,16 @@
             android:title="Bloco de Notas"
             />
         <item
-            android:id="@+id/tarefas"
+            android:id="@+id/vamosver"
             android:icon="@drawable/baseline_task_24"
-            android:title="Tarefas"
-            />
-        <item
-            android:id="@+id/calendario"
-            android:icon="@drawable/baseline_calendar_month_24"
-            android:title="Calendario"
+            android:title="vamosver"
             />
         <item
             android:id="@+id/perfil"
             android:icon="@drawable/baseline_account_circle_24"
             android:title="Perfil"
             />
+
         <item
             android:id="@+id/definicoes"
             android:icon="@drawable/baseline_settings_24"

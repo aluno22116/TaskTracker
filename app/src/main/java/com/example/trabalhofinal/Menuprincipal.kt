@@ -2,7 +2,6 @@ package com.example.trabalhofinal
 
 
 import android.os.Bundle
-import android.view.animation.AnimationUtils
 import android.widget.Button
 import com.example.trabalhofinal.databinding.ActivityMenuprincipalBinding
 import com.google.android.material.navigation.NavigationView
@@ -10,7 +9,6 @@ import com.google.android.material.navigation.NavigationView
 class Menuprincipal : TesteMenu() {
 
     private lateinit var binding: ActivityMenuprincipalBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -28,42 +26,43 @@ class Menuprincipal : TesteMenu() {
     }
 
     private fun setupButtonListeners() {
-        val buttonCriadores = findViewById<Button>(R.id.buttonCriadores)
-        val buttonPerfil = findViewById<Button>(R.id.buttonPerfil)
-        val buttonBNotas = findViewById<Button>(R.id.buttonBNotas)
+        val buttonCriadores = findViewById<Button>(R.id.vamosver)
+        val buttonPerfil = findViewById<Button>(R.id.perfil)
+        //val buttonBNotas = findViewById<Button>(R.id.buttonBNotas)
 
         buttonCriadores.setOnClickListener {
-            it.startAnimation(AnimationUtils.loadAnimation(this, R.anim.button_click_animation))
-            abrirCriadores(Criadores())
+            //it.startAnimation(AnimationUtils.loadAnimation(this, R.anim.button_click_animation))
+            abrirCriadores(vamosver())
          }
 
-        /*buttonPerfil.setOnClickListener {
-            it.startAnimation(AnimationUtils.loadAnimation(this, R.anim.button_click_animation))
-            abrirPerfil(Perfil())
+        buttonPerfil.setOnClickListener {
+            //it.startAnimation(AnimationUtils.loadAnimation(this, R.anim.button_click_animation))
+            abrirPerfil(perfil())
         }
-        buttonBNotas.setOnClickListener {
+       /* buttonBNotas.setOnClickListener {
             it.startAnimation(AnimationUtils.loadAnimation(this, R.anim.button_click_animation))
             abrirBnotas(Bnotas())
         }*/
     }
 
-    private fun abrirCriadores(fragment: Criadores) {
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.fragmento, fragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
+    private fun abrirCriadores(fragment: vamosver) {
+
+            val balanceViewFragment = vamosver()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, balanceViewFragment)
+                .commit()
 
     }
 
-   /* private fun abrirPerfil(fragment: Perfil) {
+    private fun abrirPerfil(fragment: perfil) {
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.fragmento, fragment)
+        transaction.replace(R.id.fragment_container, fragment)
         transaction.addToBackStack(null)
         transaction.commit()
     }
 
 
-    private fun abrirBnotas(fragment: Bnotas) {
+   /* private fun abrirBnotas(fragment: Bnotas) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragmento, fragment)
         transaction.addToBackStack(null)
