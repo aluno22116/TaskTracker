@@ -1,5 +1,6 @@
 package com.example.trabalhofinal
 
+import Perfil
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -28,7 +29,7 @@ open class TesteMenu : AppCompatActivity() {
         drawerLayout.addDrawerListener(drawerToggle)
         drawerToggle.syncState()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        
+
         navigationView.setNavigationItemSelectedListener { menuItem ->
             handleMenuItemClick(menuItem.itemId)
         }
@@ -39,8 +40,10 @@ open class TesteMenu : AppCompatActivity() {
     public fun handleMenuItemClick(itemId: Int): Boolean {
         val intent = when (itemId) {
             R.id.menu -> Intent(this, Menuprincipal::class.java)
-            R.id.perfil -> Intent(this, Perfil::class.java)
             R.id.notas -> Intent(this, Bnotas::class.java)
+            R.id.vamosver-> Intent(this, vamosver::class.java)
+            R.id.perfil-> Intent(this, Perfil::class.java)
+
             else -> null
         }
 
