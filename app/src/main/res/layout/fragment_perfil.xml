@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".perfil"
+    tools:context=".Perfil"
     android:background="#002A40">
 
 
@@ -43,7 +43,7 @@
                 android:id="@+id/btnfoto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#0087CC"
+                android:backgroundTint="#0087CC"
                 android:onClick="takePhoto"
                 android:text="Tirar Foto"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -90,4 +90,4 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-</FrameLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>

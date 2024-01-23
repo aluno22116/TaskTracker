@@ -4,19 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="#002A40">
 
 
-    <ImageView
-        android:id="@+id/imageViewBackground"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/capa"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
 
     <ImageView
         android:id="@+id/imageViewIcon"
@@ -47,6 +39,7 @@
             android:layout_marginTop="400dp"
             android:background="@drawable/input_bg"
             android:hint="Username"
+            android:textColorHint="@color/white"
             android:paddingLeft="20dp"
             android:paddingTop="10dp"
             android:paddingRight="10dp"
@@ -59,6 +52,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/input_bg"
             android:hint="Password"
+            android:textColorHint="@color/white"
             android:inputType="textPassword"
             android:paddingLeft="20dp"
             android:paddingTop="10dp"
@@ -74,7 +68,7 @@
             android:onClick="irParaMenuprincipal"
             android:text="Entrar"
             android:layout_gravity="center"
-            android:backgroundTint="@color/black"
+            android:backgroundTint="#0087CC"
             android:textColor="@color/white"
             android:layout_marginTop="10dp"
             android:background="@drawable/input_bg"/>
@@ -86,7 +80,7 @@
             android:layout_height="40dp"
             android:text="Criar Conta"
             android:layout_gravity="center"
-            android:backgroundTint="@color/black"
+            android:backgroundTint="#0087CC"
             android:textColor="@color/white"
             android:layout_marginTop="10dp"
             android:onClick="abrirCriarConta"

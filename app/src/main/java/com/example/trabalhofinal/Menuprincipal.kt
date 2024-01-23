@@ -1,7 +1,9 @@
 package com.example.trabalhofinal
 
 
+import Perfil
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import com.example.trabalhofinal.databinding.ActivityMenuprincipalBinding
 import com.google.android.material.navigation.NavigationView
@@ -37,7 +39,7 @@ class Menuprincipal : TesteMenu() {
 
         buttonPerfil.setOnClickListener {
             //it.startAnimation(AnimationUtils.loadAnimation(this, R.anim.button_click_animation))
-            abrirPerfil(perfil())
+            abrirPerfil(Perfil())
         }
        /* buttonBNotas.setOnClickListener {
             it.startAnimation(AnimationUtils.loadAnimation(this, R.anim.button_click_animation))
@@ -54,11 +56,12 @@ class Menuprincipal : TesteMenu() {
 
     }
 
-    private fun abrirPerfil(fragment: perfil) {
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.fragment_container, fragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
+    private fun abrirPerfil(fragment: Perfil) {
+        val balanceViewFragment = Perfil()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, balanceViewFragment)
+            .commit()
+        Log.e("ERRO","CLICASTE NO CARALHO DO BOTÃO")
     }
 
 
