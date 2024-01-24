@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class RetrofitInitializer {
     private val gson: Gson = GsonBuilder().setLenient().create()
-    private val host = "https://api.sheety.co/fbdf7989b3d662d677c247d1ef56dc15/dam/"
+    private val host = "https://api.sheety.co/8985fe49fbeb8d6428ce3ca585ec2675/dam/"
 
 
 

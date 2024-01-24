@@ -6,12 +6,12 @@
     android:orientation="vertical"
     android:background="@drawable/teste"
     android:gravity="bottom">
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Admin"
-    android:textColor="#FFFFFF"
-    android:textSize="30dp"
-    android:textStyle="bold"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Admin"
+        android:textColor="#FFFFFF"
+        android:textSize="30dp"
+        android:textStyle="bold"/>
 
 </LinearLayout>

@@ -1,5 +1,6 @@
 package com.example.trabalhofinal
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -34,22 +35,21 @@ class MainActivity : AppCompatActivity() {
 
         // Adicionar animação de clique apenas para o btnIrParaMenuprincipal
         buttonIrMP.setOnClickListener {
-            val intent1 = Intent(this@MainActivity, Menuprincipal::class.java)
-            startActivity(intent1)
-            //exibirImagemTemporariamente(buttonIrMP) {
-                // loginJWT()
-               // Limpar os campos de input após o clique
-               //limparCamposInput()
+            exibirImagemTemporariamente(buttonIrMP) {
+                loginJWT()
+                // Limpar os campos de input após o clique
+                limparCamposInput()
             }
         }
 
-       // signupButton.setOnClickListener {
+        signupButton.setOnClickListener {
             // Chamar a função abrirCriarConta() diretamente para o signupButton
-           // abrirCriarConta()
+            abrirCriarConta()
             // Limpar os campos de input após o clique
-           // limparCamposInput()
-       // }
-    //}
+            limparCamposInput()
+
+        }
+    }
 
     private fun exibirImagemTemporariamente(button: View, onComplete: () -> Unit) {
         val imagemExibida = findViewById<ImageView>(R.id.lapis)
@@ -89,7 +89,6 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent2)
     }
 
-
     private fun loginJWT() {
         val editTextUsername = findViewById<EditText>(R.id.usernameEditText)
         val editTextPassword = findViewById<EditText>(R.id.passwordEditText)
@@ -116,30 +115,55 @@ class MainActivity : AppCompatActivity() {
                     val users = response.body()?.users
                     if (users != null) {
                         // Verificar se existe um usuário na lista com as credenciais fornecidas
-                        val matchedUser = users.find { it.username == username && it.password == password }
+                        val matchedUser =
+                            users.find { it.username == username && it.password == password }
                         if (matchedUser != null) {
-                            // Usuário encontrado, faça o que precisa aqui
-                            Log.i("INFO", "Usuário encontrado: $matchedUser")
-                            val intent1 = Intent(this@MainActivity, TesteMenu::class.java)
-                            startActivity(intent1)
+
+                            if (matchedUser != null) {
+                                val userId = matchedUser.id.toString()
+                                val nome = matchedUser.nome.toString()
+                                val username = matchedUser.username.toString()
+                                val email = matchedUser.email.toString()
+                                // Salvar userId no SharedPreferences
+                                saveUserIdToSharedPreferences(userId, nome, username, email)
+                                // Usuário encontrado, faça o que precisa aqui
+                                Log.i("INFO", "Usuário encontrado: $matchedUser")
+                                val intent1 = Intent(this@MainActivity, Menuprincipal::class.java)
+                                //  val intent2 = Intent(this@MainActivity, CriarNotas::class.java)
+                                //  intent2.putExtra("userId", userId)
+                                startActivity(intent1)
+                                //  startActivity(intent2)
+                            } else {
+                                // Usuário não encontrado
+                                Toast.makeText(
+                                    this@MainActivity,
+                                    "Usuário não encontrado na lista.",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
                         } else {
-                            // Usuário não encontrado
-                            Toast.makeText(this@MainActivity, "Usuário não encontrado na lista.", Toast.LENGTH_SHORT).show()
+
+                            Log.e("Erro", "Lista de usuários  nula.")
                         }
                     } else {
-
-                        Log.e("Erro", "Lista de usuários  nula.")
+                        Log.e("Erro", "Erro na chamada à API: ${response.message()}")
                     }
-                } else {
-                    Log.e("Erro", "Erro na chamada à API: ${response.message()}")
                 }
             }
-
             override fun onFailure(call: Call<UserResponse>, t: Throwable) {
                 t.printStackTrace()
                 Log.e("Erro", "Erro na chamada à API: ${t.message}")
             }
         })
+    }
+    private fun saveUserIdToSharedPreferences(userId: String, nome: String, username: String, email: String) {
+        val sharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putString("userId", userId)
+        editor.putString("name", nome)
+        editor.putString("username", username)
+        editor.putString("email", email)
+        editor.apply()
     }
 
     private fun limparCamposInput() {

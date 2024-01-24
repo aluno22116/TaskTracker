@@ -50,7 +50,7 @@
             android:name=".CriarNotas"
             android:exported="false" />
         <activity
-            android:name=".Bnotas"
+            android:name=".BlocoNotas"
             android:exported="false" />
         <activity
             android:name=".CriarConta"

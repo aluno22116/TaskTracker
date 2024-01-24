@@ -53,7 +53,7 @@ class CriarConta : AppCompatActivity() {
                 val notes = NoteRequest(notas)
 
 
-                //userNotes(username, notes, user)
+                //userNotes(username, not1es, user)
                 // Verifica se o username já existe antes de tentar criar o usuário
                 getUsersApi(username, notes, user)
             } else {
@@ -78,7 +78,7 @@ class CriarConta : AppCompatActivity() {
                         } else {
                             userNotes(note, user)
                             // Usuário não existe, prossegue com o registo
-                           // realizarRegisto(user)
+                            // realizarRegisto(user)
                         }
                     } else {
                         Log.e("Erro", "Lista de usuários nula.")

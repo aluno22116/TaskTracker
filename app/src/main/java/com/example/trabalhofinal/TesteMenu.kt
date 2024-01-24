@@ -9,11 +9,12 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
 import com.example.trabalhofinal.databinding.ActivityTestemenuBinding
 import com.google.android.material.navigation.NavigationView
 
 open class TesteMenu : AppCompatActivity() {
-    private lateinit var drawerLayout: DrawerLayout
+    public lateinit var drawerLayout: DrawerLayout
     private lateinit var navigationView: NavigationView
     private lateinit var drawerToggle: ActionBarDrawerToggle
     private lateinit var binding: ActivityTestemenuBinding
@@ -33,29 +34,43 @@ open class TesteMenu : AppCompatActivity() {
         navigationView.setNavigationItemSelectedListener { menuItem ->
             handleMenuItemClick(menuItem.itemId)
         }
+    }
 
+    fun handleMenuItemClick(itemId: Int): Boolean {
+        when (itemId) {
+            R.id.menu -> {
+                val intent = Intent(this, Menuprincipal::class.java)
+                startActivity(intent)
+                drawerLayout.closeDrawer(GravityCompat.END)
+                finish()
+                return true
+            }
+            R.id.vamosver -> {
+                val fragment = vamosver()
+                abrirFragmento(fragment)
+                return true
+            }
+            R.id.perfil -> {
+                val fragment = Perfil()
+                abrirFragmento(fragment)
+                return true
+            }
+            else -> return false
+        }
+    }
+
+    private fun abrirFragmento(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+            .commit()
+        drawerLayout.closeDrawer(GravityCompat.START, true);
+        Log.e("ERRO","ta a fechar a puta do drawer")
+        // Fecha o DrawerLayout após um pequeno atraso para dar tempo à animação
 
     }
 
-    public fun handleMenuItemClick(itemId: Int): Boolean {
-        val intent = when (itemId) {
-            R.id.menu -> Intent(this, Menuprincipal::class.java)
-            R.id.notas -> Intent(this, Bnotas::class.java)
-            R.id.vamosver-> Intent(this, vamosver::class.java)
-            R.id.perfil-> Intent(this, Perfil::class.java)
 
-            else -> null
-        }
 
-        intent?.let {
-            it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP) // Adiciona a flag para limpar as atividades no topo da pilha
-            startActivity(it)
-            drawerLayout.closeDrawer(GravityCompat.START)
-            finish() // Encerra a atividade atual
-            return true
-        }
-        return false
-    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (drawerToggle.onOptionsItemSelected(item)) {
@@ -70,5 +85,4 @@ open class TesteMenu : AppCompatActivity() {
             drawerLayout.openDrawer(GravityCompat.START)
         }
     }
-    }
-
+}
