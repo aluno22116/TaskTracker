@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/capa">
+    android:background="#002A40">
 
     <TextView
         android:id="@+id/splashText"
@@ -10,7 +10,8 @@
         android:layout_height="wrap_content"
         android:textSize="50sp"
         android:textStyle="bold"
-        android:textColor="#000000"
+        android:fontFamily="serif"
+        android:textColor="@color/white"
         android:layout_centerInParent="true" />
 
 </RelativeLayout>
