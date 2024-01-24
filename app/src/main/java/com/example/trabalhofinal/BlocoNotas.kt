@@ -1,3 +1,4 @@
+
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -36,10 +37,10 @@ class BlocoNotas : Fragment() {
         setupButtonListeners()
         val userId = getSavedUserId()
 
-        // val btnCreateNote: Button = binding.btnCreateNoteFromView
+       // val btnCreateNote: Button = binding.btnCreateNoteFromView
         //btnCreateNote.setOnClickListener {
-        //  getNotes()
-        // startActivity(Intent(this@Bnotas, CriarNotas::class.java))
+          //  getNotes()
+            // startActivity(Intent(this@Bnotas, CriarNotas::class.java))
         //}
 
         return view

@@ -34,24 +34,24 @@ class Menuprincipal : TesteMenu() {
         buttonCriadores.setOnClickListener {
             //it.startAnimation(AnimationUtils.loadAnimation(this, R.anim.button_click_animation))
             abrirCriadores(vamosver())
-        }
+         }
 
         buttonPerfil.setOnClickListener {
             //it.startAnimation(AnimationUtils.loadAnimation(this, R.anim.button_click_animation))
             abrirPerfil(Perfil())
         }
         buttonBNotas.setOnClickListener {
-            //  it.startAnimation(AnimationUtils.loadAnimation(this, R.anim.button_click_animation))
+          //  it.startAnimation(AnimationUtils.loadAnimation(this, R.anim.button_click_animation))
             abrirBnotas(BlocoNotas())
         }
     }
 
     private fun abrirCriadores(fragment: vamosver) {
 
-        val balanceViewFragment = vamosver()
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, balanceViewFragment)
-            .commit()
+            val balanceViewFragment = vamosver()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, balanceViewFragment)
+                .commit()
 
     }
 
@@ -70,17 +70,17 @@ class Menuprincipal : TesteMenu() {
             .commit()
     }
 
-    /* private fun abrirDrawerBtn(){
-     val btnMenuDrawer = findViewById<ImageButton>(R.id.btnMenuDrawer)
-         btnMenuDrawer.setOnClickListener {
-             drawerLayout.openDrawer(GravityCompat.START,true)
-         }
-         val toggle = ActionBarDrawerToggle(
-             this,
-             drawerLayout,
-             R.string.navigation_drawer_open,
-             R.string.navigation_drawer_close
-         )
-     }*/
+   /* private fun abrirDrawerBtn(){
+    val btnMenuDrawer = findViewById<ImageButton>(R.id.btnMenuDrawer)
+        btnMenuDrawer.setOnClickListener {
+            drawerLayout.openDrawer(GravityCompat.START,true)
+        }
+        val toggle = ActionBarDrawerToggle(
+            this,
+            drawerLayout,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
+        )
+    }*/
 
 }

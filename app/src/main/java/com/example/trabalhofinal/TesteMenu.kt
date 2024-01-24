@@ -67,7 +67,7 @@ open class TesteMenu : AppCompatActivity() {
         Log.e("ERRO","ta a fechar a puta do drawer")
         // Fecha o DrawerLayout após um pequeno atraso para dar tempo à animação
 
-    }
+        }
 
 
 
@@ -85,4 +85,5 @@ open class TesteMenu : AppCompatActivity() {
             drawerLayout.openDrawer(GravityCompat.START)
         }
     }
-}
+    }
+
