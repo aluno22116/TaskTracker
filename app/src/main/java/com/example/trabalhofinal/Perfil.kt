@@ -18,6 +18,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import com.example.trabalhofinal.R
+import com.example.trabalhofinal.databinding.FragmentPerfilBinding
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -26,6 +27,7 @@ import java.util.Locale
 
 class Perfil : Fragment(R.layout.fragment_perfil) {
 
+    private lateinit var binding: FragmentPerfilBinding
     private val ourRequestCode = 123
     private val cameraPermissionRequest = 124
     private lateinit var currentPhotoPath: String
