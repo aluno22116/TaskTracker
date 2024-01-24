@@ -53,7 +53,7 @@ class CriarConta : AppCompatActivity() {
                 val notes = NoteRequest(notas)
 
 
-                //userNotes(username, notes, user)
+                //userNotes(username, not1es, user)
                 // Verifica se o username já existe antes de tentar criar o usuário
                 getUsersApi(username, notes, user)
             } else {

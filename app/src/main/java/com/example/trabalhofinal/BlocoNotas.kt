@@ -1,6 +1,4 @@
 
-
-
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -8,8 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.trabalhofinal.ARG_PARAM1
-import com.example.trabalhofinal.ARG_PARAM2
+import com.example.trabalhofinal.CriarNotas
 import com.example.trabalhofinal.R
 import com.example.trabalhofinal.databinding.FragmentBloconotasBinding
 import com.example.trabalhofinal.model.Note
@@ -77,7 +74,7 @@ class BlocoNotas : Fragment() {
                                 // Inicie a atividade CriarNotas após obter as notas
                                 // Substitua o nome do fragmento e a transação de fragmento conforme necessário
                                 val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
-                                fragmentTransaction.replace(R.id.fragment_container, BlocoNotas.newInstance("param1", "param2"))
+                                fragmentTransaction.replace(R.id.fragment_container, BlocoNotas.newInstance())
                                 fragmentTransaction.addToBackStack(null)
                                 fragmentTransaction.commit()
                             } else {
@@ -128,37 +125,22 @@ class BlocoNotas : Fragment() {
         // Implemente a lógica para lidar com os itens do menu de navegação, se necessário
         return true
     }
-    private fun setupButtonListeners() {
-        val btnIrCriarNotas = binding.btnCreateNoteFromView
-        btnIrCriarNotas.setOnClickListener {
-            abrirCriarNotas(CriarNotas())
-        }
-    }
-
-    private fun abrirCriarNotas(fragment: CriarNotas) {
+    private fun abrirCriarNotas() {
         val balanceViewFragment = CriarNotas()
         requireActivity().supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, balanceViewFragment)
             .commit()
     }
 
+    private fun setupButtonListeners() {
+        val btnIrCriarNotas = binding.btnCreateNoteFromView
+        btnIrCriarNotas.setOnClickListener {
+            abrirCriarNotas()
+        }
+    }
+
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment bloconotas.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            BlocoNotas().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        fun newInstance() = BlocoNotas()
     }
 }
