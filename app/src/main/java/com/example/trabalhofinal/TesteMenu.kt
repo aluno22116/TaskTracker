@@ -1,5 +1,6 @@
 package com.example.trabalhofinal
 
+import BlocoNotas
 import Perfil
 import android.content.Intent
 import android.os.Bundle
@@ -14,7 +15,7 @@ import com.example.trabalhofinal.databinding.ActivityTestemenuBinding
 import com.google.android.material.navigation.NavigationView
 
 open class TesteMenu : AppCompatActivity() {
-    public lateinit var drawerLayout: DrawerLayout
+    private lateinit var drawerLayout: DrawerLayout
     private lateinit var navigationView: NavigationView
     private lateinit var drawerToggle: ActionBarDrawerToggle
     private lateinit var binding: ActivityTestemenuBinding
@@ -55,6 +56,11 @@ open class TesteMenu : AppCompatActivity() {
                 abrirFragmento(fragment)
                 return true
             }
+            R.id.notas -> {
+                val fragment = BlocoNotas()
+                abrirFragmento(fragment)
+                return true
+            }
             else -> return false
         }
     }
@@ -65,7 +71,6 @@ open class TesteMenu : AppCompatActivity() {
             .commit()
         drawerLayout.closeDrawer(GravityCompat.START, true);
         Log.e("ERRO","ta a fechar a puta do drawer")
-        // Fecha o DrawerLayout após um pequeno atraso para dar tempo à animação
 
         }
 

@@ -12,6 +12,7 @@
     android:text="Admin"
     android:textColor="#FFFFFF"
     android:textSize="30dp"
-    android:textStyle="bold"/>
+    android:textStyle="bold"
+    android:layout_marginTop="120dp"/>
 
 </LinearLayout>
