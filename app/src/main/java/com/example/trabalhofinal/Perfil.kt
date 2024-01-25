@@ -21,6 +21,7 @@ import com.example.trabalhofinal.R
 import com.example.trabalhofinal.databinding.FragmentPerfilBinding
 import com.example.trabalhofinal.model.Note
 import com.example.trabalhofinal.model.NoteRequest
+import com.example.trabalhofinal.model.NoteResponse
 import com.example.trabalhofinal.retrofit.RetrofitInitializer
 import retrofit2.Call
 import retrofit2.Callback
@@ -52,6 +53,10 @@ class Perfil : Fragment(R.layout.fragment_perfil) {
         val textViewUsername = view.findViewById<TextView>(R.id.nomePerfil)
         val textViewEmail = view.findViewById<TextView>(R.id.emailPerfil)
 
+        val userId = getSavedUserId()
+
+        getImage(userId)
+
         // Verificar se há um caminho de foto salvo
         val savedPhotoPath = sharedPreferences.getString("photoPath", null)
         if (savedPhotoPath != null) {
@@ -64,7 +69,6 @@ class Perfil : Fragment(R.layout.fragment_perfil) {
         val nome = sharedPreferences.getString("name", "")
         val username = sharedPreferences.getString("username", "")
         val email = sharedPreferences.getString("email", "")
-
 
         // Definir textos nas TextViews
         textViewNome.text = "Nome: $nome"
@@ -181,32 +185,92 @@ class Perfil : Fragment(R.layout.fragment_perfil) {
         }
     }
 
-    private fun imagem(userId: String){
+    private fun imagem(userId: String) {
+        val imagem = currentPhotoPath
+        val nota = Note(null, null, null, imagem)
+        val notes = NoteRequest(nota)
+        val putCall = RetrofitInitializer().service().updateNote("Bearer Tostas", userId, notes)
+        putCall.enqueue(object : Callback<NoteRequest> {
+            override fun onResponse(call: Call<NoteRequest>, response: Response<NoteRequest>) {
+                if (response.isSuccessful) {
+                    // Trate a resposta bem-sucedida conforme necessário
+                    Log.i("ALERTA!!!!!!!!", "Nota colocada na API")
+                } else {
+                    Log.e("Erro", "Erro na chamada à API de atualização de nota: ${response.message()}")
+                    // Lide com o erro conforme necessário
+                }
+            }
 
-            val imagem =currentPhotoPath
-            val nota = Note(null,null, null,imagem)
-            val notes = NoteRequest(nota)
-            val putCall = RetrofitInitializer().service().updateNote("Bearer Tostas", userId, notes)
-            putCall.enqueue(object : Callback<NoteRequest> {
-                override fun onResponse(call: Call<NoteRequest>, response: Response<NoteRequest>) {
+            override fun onFailure(call: Call<NoteRequest>, t: Throwable) {
+                t.printStackTrace()
+                Log.e("Erro", "Erro na chamada à API de atualização de nota: ${t.message}")
+                // Lide com o erro conforme necessário
+            }
+        })
+    }
+
+    private fun getImage(userId: String) {
+        // Verifica se o userId é válido
+        if (userId.isNotEmpty()) {
+            val call = RetrofitInitializer().service().getNotes("Bearer Tostas", userId)
+
+            call.enqueue(object : Callback<NoteResponse> {
+                override fun onResponse(call: Call<NoteResponse>, response: Response<NoteResponse>) {
                     if (response.isSuccessful) {
-                        // Trate a resposta bem-sucedida conforme necessário
-                        Log.i("ALERTA!!!!!!!!","Nota colocada na API")
+                        val noteResponse = response.body()
+                        if (noteResponse != null) {
+                            val notes = noteResponse.notes
+                            val imagemStrings = mutableListOf<String>()
 
+                            if (notes != null && notes.isNotEmpty()) {
+                                // O usuário tem notas, faça algo com as notas obtidas da API
+                                // Por exemplo, exibir ou processar as notas
+                                Log.e("Notas", "O usuário tem notas")
+                                Log.i("INFO", "Usuário encontrado: $notes")
+
+                                // Itera sobre a lista de notas e obtém o parâmetro 'notas'
+                                for (note in notes) {
+                                    // Verifica se o ID do usuário da nota é o mesmo que o usuário logado
+                                    if (note.id.toString() == userId) {
+                                        val nota = note.imagem
+                                        if (nota != null) {
+                                            imagemStrings.add(nota)
+                                        }
+                                    }
+                                }
+
+                                // Converte a lista de strings em uma string separada por algum caractere, por exemplo, vírgula
+                                val imgString = imagemStrings.joinToString()
+
+                                if (imgString != null) {
+                                    val imageView: ImageView = requireView().findViewById(R.id.fotografia)
+                                    val photoUri: Uri = Uri.fromFile(File(imgString))
+                                    imageView.setImageURI(photoUri)
+                                } else {
+                                    // O usuário não tem notas
+                                    Log.e("Notas", "O usuário não tem notas")
+                                    // Aqui você pode decidir o que fazer quando o usuário não tem notas
+                                    // Por exemplo, exibir uma mensagem ou realizar alguma outra ação
+                                }
+                            } else {
+                                Log.e("Erro", "Resposta nula.")
+                            }
+                        }
                     } else {
-                        Log.e("Erro", "Erro na chamada à API de atualização de nota: ${response.message()}")
-                        // Lide com o erro conforme necessário
+                        Log.e("Erro", "Erro na chamada à API: ${response.message()}")
                     }
                 }
 
-                override fun onFailure(call: Call<NoteRequest>, t: Throwable) {
+                override fun onFailure(call: Call<NoteResponse>, t: Throwable) {
                     t.printStackTrace()
-                    Log.e("Erro", "Erro na chamada à API de atualização de nota: ${t.message}")
-                    // Lide com o erro conforme necessário
+                    Log.e("Erro", "Erro na chamada à API: ${t.message}")
                 }
             })
+        } else {
+            // userId não é válido, faça algo aqui se necessário
+            Log.e("Erro", "userId inválido")
         }
-
+    }
 
     private fun getSavedUserId(): String {
         val savedUserId = sharedPreferences.getString("userId", "")
@@ -219,5 +283,10 @@ class Perfil : Fragment(R.layout.fragment_perfil) {
             savedUserId
         }
     }
-}
 
+    private fun saveNotesToSharedPreferences(notesString: String) {
+        val editor = sharedPreferences.edit()
+        editor.putString("notes", notesString)
+        editor.apply()
+    }
+}
