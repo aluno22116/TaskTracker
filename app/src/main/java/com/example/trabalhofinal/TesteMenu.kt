@@ -20,7 +20,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-open class TesteMenu : AppCompatActivity() {
+ open class TesteMenu : AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navigationView: NavigationView
     private lateinit var drawerToggle: ActionBarDrawerToggle
@@ -43,7 +43,7 @@ open class TesteMenu : AppCompatActivity() {
         }
     }
 
-    fun handleMenuItemClick(itemId: Int): Boolean {
+    public fun handleMenuItemClick(itemId: Int): Boolean {
         when (itemId) {
             R.id.menu -> {
                 val intent = Intent(this, Menuprincipal::class.java)
