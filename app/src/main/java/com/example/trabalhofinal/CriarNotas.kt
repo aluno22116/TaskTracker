@@ -26,6 +26,10 @@ class CriarNotas : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_criar_notas, container, false)
+        // Configurar o texto padrão do EditText aqui
+        val editarTexto = view.findViewById<EditText>(R.id.novaNota)
+        val notesString = getSavedNotes()
+        editarTexto.setText(notesString)
         setupButtonListeners(view)
         return view
     }
@@ -46,6 +50,10 @@ class CriarNotas : Fragment() {
 
         val btnSalvarNota = view.findViewById<Button>(R.id.btnSalvarNota)
         val btnApagarNota = view.findViewById<Button>(R.id.btnApagarNota)
+        val editarTexto = view.findViewById<EditText>(R.id.novaNota)
+
+        // Configurar o texto padrão do EditText aqui
+        editarTexto.setText(savedNotes)
 
         btnSalvarNota.setOnClickListener {
             if (userId.isNotEmpty()) {
@@ -55,7 +63,8 @@ class CriarNotas : Fragment() {
         }
 
         btnApagarNota.setOnClickListener {
-
+            // Limpar o texto da EditText quando o botão for clicado
+            editarTexto.text.clear()
         }
     }
 
