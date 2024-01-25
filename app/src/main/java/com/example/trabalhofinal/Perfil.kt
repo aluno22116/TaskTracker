@@ -1,8 +1,8 @@
-
 import android.Manifest
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
@@ -19,11 +19,18 @@ import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import com.example.trabalhofinal.R
 import com.example.trabalhofinal.databinding.FragmentPerfilBinding
+import com.example.trabalhofinal.model.Note
+import com.example.trabalhofinal.model.NoteRequest
+import com.example.trabalhofinal.retrofit.RetrofitInitializer
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import java.util.UUID
 
 class Perfil : Fragment(R.layout.fragment_perfil) {
 
@@ -31,9 +38,13 @@ class Perfil : Fragment(R.layout.fragment_perfil) {
     private val ourRequestCode = 123
     private val cameraPermissionRequest = 124
     private lateinit var currentPhotoPath: String
+    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // Inicializar o SharedPreferences
+        sharedPreferences = requireActivity().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
 
         setupCameraButton(view)
 
@@ -41,11 +52,18 @@ class Perfil : Fragment(R.layout.fragment_perfil) {
         val textViewUsername = view.findViewById<TextView>(R.id.nomePerfil)
         val textViewEmail = view.findViewById<TextView>(R.id.emailPerfil)
 
+        // Verificar se há um caminho de foto salvo
+        val savedPhotoPath = sharedPreferences.getString("photoPath", null)
+        if (savedPhotoPath != null) {
+            val imageView: ImageView = requireView().findViewById(R.id.fotografia)
+            val photoUri: Uri = Uri.fromFile(File(savedPhotoPath))
+            imageView.setImageURI(photoUri)
+        }
+
         // Ao criar a visão, você pode acessar os dados do SharedPreferences
-        val sharedPreferences = activity?.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
-        val nome = sharedPreferences?.getString("name", "")
-        val username = sharedPreferences?.getString("username", "")
-        val email = sharedPreferences?.getString("email", "")
+        val nome = sharedPreferences.getString("name", "")
+        val username = sharedPreferences.getString("username", "")
+        val email = sharedPreferences.getString("email", "")
 
 
         // Definir textos nas TextViews
@@ -79,7 +97,7 @@ class Perfil : Fragment(R.layout.fragment_perfil) {
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         if (intent.resolveActivity(requireContext().packageManager) != null) {
             val photoFile: File? = try {
-                // Criar arquivo para armazenar a imagem
+                // Adicionar userId ao nome do arquivo para distinguir entre usuários
                 criarArquivoImagem()
             } catch (ex: IOException) {
                 null
@@ -106,9 +124,12 @@ class Perfil : Fragment(R.layout.fragment_perfil) {
     private fun criarArquivoImagem(): File {
         val timeStamp: String =
             SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
+        val userId = getSavedUserId()
+        val fileName = "JPEG_${userId}_${timeStamp}_"
+
         val storageDir: File? = requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES)
         return File.createTempFile(
-            "JPEG_${timeStamp}_",
+            fileName,
             ".jpg",
             storageDir
         ).apply {
@@ -117,7 +138,6 @@ class Perfil : Fragment(R.layout.fragment_perfil) {
     }
 
     // Função chamada quando a atividade da câmera é concluída
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -129,23 +149,27 @@ class Perfil : Fragment(R.layout.fragment_perfil) {
 
             // Configurar a foto na ImageView
             imageView.setImageURI(photoUri)
-        }
-    }
 
-    // Função chamada quando as permissões são solicitadas pelo usuário
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+            // Salvar o caminho da foto no SharedPreferences se o userId for o mesmo
+            val userId = getSavedUserId()
+            val savedUserId = sharedPreferences.getString("userId", "")
+            if (userId == savedUserId) {
+                val editor = sharedPreferences.edit()
+                editor.putString("photoPath", currentPhotoPath)
+                editor.apply()
+                imagem(userId)
+            } else {
+                // Limpar o caminho da foto anterior
+                Log.e("AQUI VEEEEEEE", "AQUUIIIIIIIIIIIII")
+                val editor = sharedPreferences.edit()
+                editor.remove("photoPath")
+                editor.apply()
 
-        // Verificar se a permissão da câmera foi concedida
-        if (requestCode == cameraPermissionRequest && grantResults.isNotEmpty() &&
-            grantResults[0] == PackageManager.PERMISSION_GRANTED
-        ) {
-            // Se sim, iniciar a câmera
-            iniciarCamera()
+                // Salvar o novo userId e o caminho da foto
+                editor.putString("userId", userId)
+                editor.putString("photoPath", currentPhotoPath)
+                editor.apply()
+            }
         }
     }
 
@@ -157,4 +181,43 @@ class Perfil : Fragment(R.layout.fragment_perfil) {
         }
     }
 
+    private fun imagem(userId: String){
+
+            val imagem =currentPhotoPath
+            val nota = Note(null,null, null,imagem)
+            val notes = NoteRequest(nota)
+            val putCall = RetrofitInitializer().service().updateNote("Bearer Tostas", userId, notes)
+            putCall.enqueue(object : Callback<NoteRequest> {
+                override fun onResponse(call: Call<NoteRequest>, response: Response<NoteRequest>) {
+                    if (response.isSuccessful) {
+                        // Trate a resposta bem-sucedida conforme necessário
+                        Log.i("ALERTA!!!!!!!!","Nota colocada na API")
+
+                    } else {
+                        Log.e("Erro", "Erro na chamada à API de atualização de nota: ${response.message()}")
+                        // Lide com o erro conforme necessário
+                    }
+                }
+
+                override fun onFailure(call: Call<NoteRequest>, t: Throwable) {
+                    t.printStackTrace()
+                    Log.e("Erro", "Erro na chamada à API de atualização de nota: ${t.message}")
+                    // Lide com o erro conforme necessário
+                }
+            })
+        }
+
+
+    private fun getSavedUserId(): String {
+        val savedUserId = sharedPreferences.getString("userId", "")
+        return if (savedUserId.isNullOrEmpty()) {
+            // Gerar um novo ID se nenhum estiver salvo
+            val newUserId = UUID.randomUUID().toString()
+            sharedPreferences.edit().putString("userId", newUserId).apply()
+            newUserId
+        } else {
+            savedUserId
+        }
+    }
 }
+

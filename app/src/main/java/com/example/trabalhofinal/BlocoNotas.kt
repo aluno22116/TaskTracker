@@ -31,76 +31,20 @@ class BlocoNotas : Fragment() {
     ): View? {
         // Use o layout inflater apropriado para o fragmento BlocoNotas
         binding = FragmentBloconotasBinding.inflate(inflater, container, false)
-        val view = binding.root
+        return binding.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         setupButtonListeners()
-        val userId = getSavedUserId()
 
-       // val btnCreateNote: Button = binding.btnCreateNoteFromView
-        //btnCreateNote.setOnClickListener {
-          //  getNotes()
-            // startActivity(Intent(this@Bnotas, CriarNotas::class.java))
-        //}
 
-        return view
     }
 
 
-    private fun getNotes() {
-        val userId = getSavedUserId()
 
-        // Verifica se o userId é válido
-        if (userId.isNotEmpty()) {
-            val call = RetrofitInitializer().service().getNotes("Bearer Tostas")
 
-            call.enqueue(object : Callback<NoteResponse> {
-                override fun onResponse(call: Call<NoteResponse>, response: Response<NoteResponse>) {
-                    if (response.isSuccessful) {
-                        val noteResponse = response.body()
-                        if (noteResponse != null) {
-                            val notes = noteResponse.notes
-                            if (notes != null && notes.isNotEmpty()) {
-                                // O usuário tem notas, faça algo com as notas obtidas da API
-                                // Por exemplo, exibir ou processar as notas
-                                Log.e("Notas", "O usuário tem notas")
-                                Log.i("INFO", "Usuário encontrado: $notes")
-                                // Converte a lista de notas em uma string
-                                val notesString = notesToString(notes)
-
-                                // Salva a string na SharedPreferences
-                                saveNotesToSharedPreferences(notesString)
-
-                                // Inicie a atividade CriarNotas após obter as notas
-                                // Substitua o nome do fragmento e a transação de fragmento conforme necessário
-                                val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
-                                fragmentTransaction.replace(R.id.fragment_container, BlocoNotas.newInstance())
-                                fragmentTransaction.addToBackStack(null)
-                                fragmentTransaction.commit()
-                            } else {
-                                // O usuário não tem notas
-                                Log.e("Notas", "O usuário não tem notas")
-                                // Aqui você pode decidir o que fazer quando o usuário não tem notas
-                                // Por exemplo, exibir uma mensagem ou realizar alguma outra ação
-                            }
-                        } else {
-                            Log.e("Erro", "Resposta nula.")
-                        }
-                    } else {
-                        Log.e("Erro", "Erro na chamada à API: ${response.message()}")
-                    }
-                }
-
-                override fun onFailure(call: Call<NoteResponse>, t: Throwable) {
-                    t.printStackTrace()
-                    Log.e("Erro", "Erro na chamada à API: ${t.message}")
-                }
-            })
-        } else {
-            // userId não é válido, faça algo aqui se necessário
-            Log.e("Erro", "userId inválido")
-        }
-    }
 
     // Função para converter a lista de notas em uma string
     private fun notesToString(notes: List<Note>): String {
@@ -125,6 +69,13 @@ class BlocoNotas : Fragment() {
         // Implemente a lógica para lidar com os itens do menu de navegação, se necessário
         return true
     }
+
+    private fun getSavedNotes(): String {
+        val sharedPreferences = requireActivity().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        return sharedPreferences.getString("notes", "") ?: ""
+    }
+
+
     private fun abrirCriarNotas() {
         val balanceViewFragment = CriarNotas()
         requireActivity().supportFragmentManager.beginTransaction()
@@ -134,6 +85,9 @@ class BlocoNotas : Fragment() {
 
     private fun setupButtonListeners() {
         val btnIrCriarNotas = binding.btnCreateNoteFromView
+        // Carrega as notas da SharedPreferences e exibe na TextView
+        val notesString = getSavedNotes()
+        binding.textViewNotes.text = notesString
         btnIrCriarNotas.setOnClickListener {
             abrirCriarNotas()
         }

@@ -1,6 +1,5 @@
 package com.example.trabalhofinal.retrofit.service
 
-import com.example.trabalhofinal.model.Note
 import com.example.trabalhofinal.model.NoteRequest
 import com.example.trabalhofinal.model.NoteResponse
 import com.example.trabalhofinal.model.TokenJWT
@@ -15,13 +14,17 @@ import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface Service {
     @GET("users")
     fun getUsers(@Header("Authorization") token: String): Call<UserResponse>
 
+ //   @GET("notes")
+ //   fun getNotes(@Header("Authorization") token: String, userId: String): Call<NoteResponse>
+
     @GET("notes")
-    fun getNotes(@Header("Authorization") token: String): Call<NoteResponse>
+    fun getNotes(@Header("Authorization") authorization: String, @Query("userId") userId: String): Call<NoteResponse>
 
 
 
@@ -41,6 +44,24 @@ interface Service {
     @PUT("notes/{userId}")
     fun updateNote(@Header("Authorization") token: String, @Path("userId") userId: String?, @Body updatedNote: NoteRequest): Call<NoteRequest>
 
+//   @Multipart
+//   @PUT("notes/{userId}")
+//   fun updateImg(
+//       @Header("Authorization") authorization: String,
+//       @Path("userId") userId: String,
+//       @Part("note") note: NoteRequest,
+//       @Part image: MultipartBody.Part
+//   ): Call<NoteRequest>
+
+//    @Multipart
+//    @PUT("notes/{userId}")
+//    fun updateImg(
+//        @Header("Authorization") authorization: String,
+//        @Path("userId") userId: String,
+//        @Part("note") note: RequestBody,
+//        @Part("outroCampo") outroCampo: RequestBody,
+//        @Part image: MultipartBody.Part
+//    ): Call<NoteRequest>
 
 
 
@@ -49,7 +70,8 @@ interface Service {
 
 
 
-   @POST("notes/{userId}")
+
+    @POST("notes/{userId}")
    fun addUserNotes(@Header("Authorization") token: String, @Path("userId") userId: String, @Body notes: List<NoteRequest>): Call<List<NoteRequest>>
 
 

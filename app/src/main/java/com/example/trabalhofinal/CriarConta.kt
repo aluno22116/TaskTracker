@@ -78,7 +78,7 @@ class CriarConta : AppCompatActivity() {
                         } else {
                             userNotes(note, user)
                             // Usuário não existe, prossegue com o registo
-                           // realizarRegisto(user)
+                            // realizarRegisto(user)
                         }
                     } else {
                         Log.e("Erro", "Lista de usuários nula.")
