@@ -2,13 +2,14 @@ package com.example.trabalhofinal
 import BlocoNotas
 import Perfil
 import android.content.Context
-import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.ImageButton
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.trabalhofinal.databinding.ActivityMenuprincipalBinding
@@ -26,6 +27,11 @@ class Menuprincipal : TesteMenu() {
     private lateinit var drawerLayout: DrawerLayout  // Adicione essa linha para definir o DrawerLayout
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.statusBarColor = ContextCompat.getColor(this, R.color.black)
+        }
+
         binding = ActivityMenuprincipalBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -35,6 +41,7 @@ class Menuprincipal : TesteMenu() {
         val navigationView: NavigationView = findViewById(R.id.nav_view)
         navigationView.setNavigationItemSelectedListener { menuItem ->
             handleMenuItemClick(menuItem.itemId)
+
         }
     }
 
