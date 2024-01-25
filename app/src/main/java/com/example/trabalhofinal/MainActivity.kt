@@ -14,6 +14,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.trabalhofinal.model.NoteResponse
 import com.example.trabalhofinal.model.UserResponse
 import com.example.trabalhofinal.retrofit.RetrofitInitializer
 import retrofit2.Call
@@ -124,6 +125,7 @@ class MainActivity : AppCompatActivity() {
                                 val nome = matchedUser.nome.toString()
                                 val username = matchedUser.username.toString()
                                 val email = matchedUser.email.toString()
+
                                 // Salvar userId no SharedPreferences
                                 saveUserIdToSharedPreferences(userId, nome, username, email)
                                 // Usuário encontrado, faça o que precisa aqui
@@ -175,4 +177,10 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    }
+
+
+
+
+
+
+}

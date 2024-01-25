@@ -5,26 +5,26 @@ import com.example.trabalhofinal.model.NoteResponse
 import com.example.trabalhofinal.model.TokenJWT
 import com.example.trabalhofinal.model.UserRequest
 import com.example.trabalhofinal.model.UserResponse
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.Header
-import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.PUT
-import retrofit2.http.Part
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface Service {
     @GET("users")
     fun getUsers(@Header("Authorization") token: String): Call<UserResponse>
 
+ //   @GET("notes")
+ //   fun getNotes(@Header("Authorization") token: String, userId: String): Call<NoteResponse>
+
     @GET("notes")
-    fun getNotes(@Header("Authorization") token: String): Call<NoteResponse>
+    fun getNotes(@Header("Authorization") authorization: String, @Query("userId") userId: String): Call<NoteResponse>
 
 
 
