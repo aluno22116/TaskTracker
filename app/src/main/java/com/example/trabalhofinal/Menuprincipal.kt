@@ -41,14 +41,15 @@ class Menuprincipal : TesteMenu() {
         val navigationView: NavigationView = findViewById(R.id.nav_view)
         navigationView.setNavigationItemSelectedListener { menuItem ->
             handleMenuItemClick(menuItem.itemId)
-
         }
+
     }
 
     private fun setupButtonListeners() {
         val buttonCriadores = findViewById<Button>(R.id.vamosver)
         val buttonPerfil = findViewById<Button>(R.id.perfil)
         val buttonBNotas = findViewById<Button>(R.id.notas)
+        val buttonSobre = findViewById<Button>(R.id.sobre)
 
         buttonCriadores.setOnClickListener {
             it.startAnimation(AnimationUtils.loadAnimation(this, R.anim.button_click_animation))
@@ -59,6 +60,10 @@ class Menuprincipal : TesteMenu() {
             it.startAnimation(AnimationUtils.loadAnimation(this, R.anim.button_click_animation))
 
             abrirPerfil(Perfil())  // Remova os parênteses se Perfil é uma classe ou objeto
+        }
+        buttonSobre.setOnClickListener {
+            it.startAnimation(AnimationUtils.loadAnimation(this, R.anim.button_click_animation))
+            abrirSobre(Sobre())  // Remova os parênteses se Perfil é uma classe ou objeto
         }
 
         buttonBNotas.setOnClickListener {
@@ -77,6 +82,13 @@ class Menuprincipal : TesteMenu() {
     }
 
     private fun abrirPerfil(fragment: Perfil) {
+        val balanceViewFragment = fragment
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, balanceViewFragment)
+            .commit()
+    }
+
+    private fun abrirSobre(fragment: Sobre) {
         val balanceViewFragment = fragment
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, balanceViewFragment)

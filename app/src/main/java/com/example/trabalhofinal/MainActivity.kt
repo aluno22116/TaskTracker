@@ -14,7 +14,6 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.trabalhofinal.model.NoteResponse
 import com.example.trabalhofinal.model.UserResponse
 import com.example.trabalhofinal.retrofit.RetrofitInitializer
 import retrofit2.Call
@@ -166,8 +165,8 @@ class MainActivity : AppCompatActivity() {
         editor.putString("username", username)
         editor.putString("email", email)
         editor.apply()
-    }
 
+    }
     private fun limparCamposInput() {
         val editTextUsername = findViewById<EditText>(R.id.usernameEditText)
         val editTextPassword = findViewById<EditText>(R.id.passwordEditText)
@@ -175,12 +174,4 @@ class MainActivity : AppCompatActivity() {
         editTextUsername.text.clear()
         editTextPassword.text.clear()
     }
-
-
-
-
-
-
-
-
 }

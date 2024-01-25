@@ -26,24 +26,26 @@ import retrofit2.Response
     private lateinit var drawerToggle: ActionBarDrawerToggle
     private lateinit var binding: ActivityTestemenuBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityTestemenuBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+     override fun onCreate(savedInstanceState: Bundle?) {
+         super.onCreate(savedInstanceState)
+         setContentView(R.layout.activity_testemenu) // Substitua com o layout da sua atividade
 
-        drawerLayout = findViewById(R.id.drawer_layout)
-        navigationView = findViewById(R.id.nav_view)
-        drawerToggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
-        drawerLayout.addDrawerListener(drawerToggle)
-        drawerToggle.syncState()
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        navigationView.setNavigationItemSelectedListener { menuItem ->
-            handleMenuItemClick(menuItem.itemId)
-        }
-    }
+         drawerLayout = findViewById(R.id.drawer_layout)
+         navigationView = findViewById(R.id.nav_view)
+         drawerToggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
+         drawerLayout.addDrawerListener(drawerToggle)
+         drawerToggle.syncState()
+         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+         navigationView.setNavigationItemSelectedListener { menuItem ->
+             handleMenuItemClick(menuItem.itemId)
+         }
 
-    public fun handleMenuItemClick(itemId: Int): Boolean {
+     }
+
+
+
+     public fun handleMenuItemClick(itemId: Int): Boolean {
         when (itemId) {
             R.id.menu -> {
                 val intent = Intent(this, Menuprincipal::class.java)
@@ -65,6 +67,11 @@ import retrofit2.Response
             R.id.notas -> {
                 val userId = getSavedUserId()
                 getNotes(userId)
+                return true
+            }
+            R.id.sobre -> {
+                val fragment = Sobre()
+                abrirFragmento(fragment)
                 return true
             }
             else -> return false
