@@ -47,6 +47,7 @@ class Perfil : Fragment(R.layout.fragment_perfil) {
         val username = sharedPreferences?.getString("username", "")
         val email = sharedPreferences?.getString("email", "")
 
+
         // Definir textos nas TextViews
         textViewNome.text = "Nome: $nome"
         textViewUsername.text = "Username: $username"

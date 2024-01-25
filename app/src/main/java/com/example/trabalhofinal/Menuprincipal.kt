@@ -16,7 +16,6 @@ class Menuprincipal : TesteMenu() {
 
     private lateinit var binding: ActivityMenuprincipalBinding
     private lateinit var drawerLayout: DrawerLayout  // Adicione essa linha para definir o DrawerLayout
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMenuprincipalBinding.inflate(layoutInflater)
@@ -75,6 +74,7 @@ class Menuprincipal : TesteMenu() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, balanceViewFragment)
             .commit()
+
     }
 
     private fun abrirDrawerBtn() {

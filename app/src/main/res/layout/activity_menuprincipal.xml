@@ -12,8 +12,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
@@ -65,7 +64,8 @@
                 android:layout_marginLeft="100dp"
                 android:layout_marginTop="400dp"
                 android:backgroundTint="#0087CC"
-                android:text="Criadores" />
+                android:text="Criadores"
+                android:textColor="@color/white"/>
 
             <Button
                 android:id="@+id/perfil"
@@ -74,7 +74,8 @@
                 android:text="perfil"
                 android:layout_marginTop="300dp"
                 android:layout_marginLeft="100dp"
-                android:backgroundTint="#0087CC" />
+                android:backgroundTint="#0087CC"
+                android:textColor="@color/white"/>
 
             <Button
                 android:id="@+id/notas"
@@ -83,7 +84,8 @@
                 android:layout_marginLeft="100dp"
                 android:layout_marginTop="200dp"
                 android:backgroundTint="#0087CC"
-                android:text="notas" />
+                android:text="notas"
+                android:textColor="@color/white"/>
 
         </FrameLayout>
 
