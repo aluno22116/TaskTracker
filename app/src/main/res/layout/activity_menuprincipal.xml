@@ -40,33 +40,50 @@
             android:layout_height="match_parent"
             android:background="#002A40">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Menu Principal"
+                android:textColor="@color/white"
+                android:textSize="40dp"
+                android:fontFamily="serif"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="50dp"/>
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/lapistransicao"
+                android:layout_marginLeft="330dp"
+                android:layout_marginTop="52dp"/>
+
 
             <Button
                 android:id="@+id/vamosver"
-                android:layout_width="wrap_content"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:text="vamosver"
-                android:layout_marginTop="100dp"
                 android:layout_marginLeft="100dp"
-                android:backgroundTint="#0087CC"/>
+                android:layout_marginTop="400dp"
+                android:backgroundTint="#0087CC"
+                android:text="Criadores" />
 
             <Button
                 android:id="@+id/perfil"
-                android:layout_width="wrap_content"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:text="perfil"
-                android:layout_marginTop="200dp"
+                android:layout_marginTop="300dp"
                 android:layout_marginLeft="100dp"
                 android:backgroundTint="#0087CC" />
 
             <Button
                 android:id="@+id/notas"
-                android:layout_width="wrap_content"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:text="notas"
-                android:layout_marginTop="300dp"
                 android:layout_marginLeft="100dp"
-                android:backgroundTint="#0087CC"/>
+                android:layout_marginTop="200dp"
+                android:backgroundTint="#0087CC"
+                android:text="notas" />
 
         </FrameLayout>
 
