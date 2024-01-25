@@ -1,6 +1,7 @@
 package com.example.trabalhofinal
 import BlocoNotas
 import Perfil
+import android.os.Build
 import android.os.Bundle
 import android.view.animation.AnimationUtils
 import android.widget.Button
@@ -23,11 +24,14 @@ class Menuprincipal : TesteMenu() {
 
         setupButtonListeners()
         abrirDrawerBtn()
+        setStatusBarColor()
 
         val navigationView: NavigationView = findViewById(R.id.nav_view)
         navigationView.setNavigationItemSelectedListener { menuItem ->
             handleMenuItemClick(menuItem.itemId)
         }
+
+
     }
 
     private fun setupButtonListeners() {
@@ -90,5 +94,13 @@ class Menuprincipal : TesteMenu() {
 
         drawerLayout.addDrawerListener(toggle)  // Adicione essa linha para configurar o listener
         toggle.syncState()  // Adicione essa linha para sincronizar o estado do toggle
+    }
+
+    private fun setStatusBarColor() {
+        // Verifica se a versão do Android é Lollipop ou superior
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            // Define a cor desejada da barra de status
+            window.statusBarColor = resources.getColor(R.color.preto, null)
+        }
     }
 }

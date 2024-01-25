@@ -155,4 +155,5 @@ class Perfil : Fragment(R.layout.fragment_perfil) {
             takePhoto()
         }
     }
+
 }
