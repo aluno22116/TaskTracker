@@ -35,7 +35,8 @@
 
         <activity
             android:name=".TesteMenu"
-            android:exported="false" />
+            android:exported="false"
+           />
         <activity
             android:name=".SplashScreen"
             android:exported="true"
@@ -54,7 +55,8 @@
             android:exported="false" />
         <activity
             android:name=".Menuprincipal"
-            android:exported="false" />
+            android:exported="false"
+            />
         <activity
             android:name=".MainActivity"
             android:exported="true"

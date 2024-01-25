@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CriarConta"
-    android:background="#002A40">
+    android:background="#002A40"
+    android:statusBarColor="@color/black">
 
 
     <TextView
