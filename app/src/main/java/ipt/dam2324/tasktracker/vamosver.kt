@@ -26,10 +26,9 @@ class vamosver : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        /// Infla o layout para este fragmento
         return inflater.inflate(R.layout.fragment_vamosver, container, false)
     }
-
-
 
     companion object {
         @JvmStatic

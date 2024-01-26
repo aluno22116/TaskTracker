@@ -5,6 +5,7 @@ import Perfil
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -12,20 +13,19 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
-
-import ipt.dam2324.tasktracker.model.NoteResponse
-import ipt.dam2324.tasktracker.retrofit.RetrofitInitializer
 import com.google.android.material.navigation.NavigationView
 import ipt.dam2324.tasktracker.databinding.ActivityTestemenuBinding
+import ipt.dam2324.tasktracker.model.NoteResponse
+import ipt.dam2324.tasktracker.retrofit.RetrofitInitializer
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
  open class TesteMenu : AppCompatActivity() {
-    private lateinit var drawerLayout: DrawerLayout
-    private lateinit var navigationView: NavigationView
-    private lateinit var drawerToggle: ActionBarDrawerToggle
-    private lateinit var binding: ActivityTestemenuBinding
+     private lateinit var drawerLayout: DrawerLayout
+     private lateinit var navigationView: NavigationView
+     private lateinit var drawerToggle: ActionBarDrawerToggle
+     private lateinit var binding: ActivityTestemenuBinding
 
      override fun onCreate(savedInstanceState: Bundle?) {
          super.onCreate(savedInstanceState)
@@ -44,50 +44,76 @@ import retrofit2.Response
 
      }
 
-
-
+    //Função que trata os cliques nos itens do menu.
      public fun handleMenuItemClick(itemId: Int): Boolean {
-        when (itemId) {
-            R.id.menu -> {
-                val intent = Intent(this, Menuprincipal::class.java)
-                startActivity(intent)
-                drawerLayout.closeDrawer(GravityCompat.END)
-                finish()
-                return true
-            }
-            R.id.vamosver -> {
-                val fragment = vamosver()
-                abrirFragmento(fragment)
-                return true
-            }
-            R.id.perfil -> {
-                val fragment = Perfil()
-                abrirFragmento(fragment)
-                return true
-            }
-            R.id.notas -> {
-                val userId = getSavedUserId()
-                getNotes(userId)
-                return true
-            }
-            R.id.sobre -> {
-                val fragment = Sobre()
-                abrirFragmento(fragment)
-                return true
-            }
-            else -> return false
-        }
-    }
+         when (itemId) {
+             R.id.menu -> {
+                 abrirMenu()
+                 Handler().postDelayed({
+                     finish()
+                 }, 500)
 
+                 return true
+             }
+
+             R.id.vamosver -> {
+                 val fragment = vamosver()
+                 abrirFragmento(fragment)
+                 return true
+             }
+
+             R.id.perfil -> {
+                 val fragment = Perfil()
+                 abrirFragmento(fragment)
+                 return true
+             }
+
+             R.id.notas -> {
+                 val userId = getSavedUserId()
+                 getNotes(userId)
+                 return true
+             }
+
+             R.id.sobre -> {
+                 val fragment = Sobre()
+                 abrirFragmento(fragment)
+                 return true
+             }
+
+             R.id.btnFechar -> {
+                 Handler().postDelayed({
+                     // Encerra a Menuprincipal
+                     val intentMenuprincipal = Intent(this, Menuprincipal::class.java)
+                     intentMenuprincipal.flags =
+                         Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                     startActivity(intentMenuprincipal)
+
+                     // Encerra a atividade atual (TesteMenu)
+                     finish()
+
+                 }, 500)
+                 return true
+             }
+             else -> return false
+         }
+     }
+    //Função que abre um fragmento na atividade.
     private fun abrirFragmento(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)
             .commit()
-        drawerLayout.closeDrawer(GravityCompat.START, true);
+        drawerLayout.closeDrawer(GravityCompat.END, true);
         Log.e("ERRO","ta a fechar a puta do drawer")
-
         }
 
+     //Função que abre a Menuprincipal.
+     private fun abrirMenu(){
+         val intent = Intent(this, Menuprincipal::class.java)
+         startActivity(intent)
+         drawerLayout.closeDrawer(GravityCompat.END)
+     }
+
+    //Função que obtém as notas do utilizador da API e salva na SharedPreferences.
     private fun getNotes(userId: String) {
         // val userId = getSavedUserId()
 
@@ -156,7 +182,7 @@ import retrofit2.Response
             Log.e("Erro", "userId inválido")
         }
     }
-
+    //Função que salva as notas do utilizador na SharedPreferences.
     private fun saveNotesToSharedPreferences(notesString: String) {
         val sharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
@@ -164,25 +190,19 @@ import retrofit2.Response
         editor.apply()
     }
 
+    //Função que obtém o ID do utilizador salvo na SharedPreferences.
     private fun getSavedUserId(): String {
         val sharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
         return sharedPreferences.getString("userId", "") ?: ""
     }
 
-
-
+     //Sobrescreve o método onOptionsItemSelected para lidar com eventos de clique nos itens do menu.
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (drawerToggle.onOptionsItemSelected(item)) {
             return true
         }
         return super.onOptionsItemSelected(item)
     }
-    fun clicarAbrirDrawer() {
-        Log.d("MeuApp", "Clicou no botão Abrir Drawer")
 
-        if (!drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.openDrawer(GravityCompat.START)
-        }
-    }
     }
 

@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.Fragment
-
 import ipt.dam2324.tasktracker.model.Note
 import ipt.dam2324.tasktracker.model.NoteRequest
 import ipt.dam2324.tasktracker.model.NoteResponse
@@ -19,6 +18,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+//Classe que representa um fragmento para criar notas.
 class CriarNotas : Fragment() {
 
     override fun onCreateView(
@@ -34,17 +34,17 @@ class CriarNotas : Fragment() {
         setupButtonListeners(view)
         return view
     }
-
+    //Função que obtém o ID do utilizador salvo nas SharedPreferences.
     private fun getSavedUserId(): String {
         val sharedPreferences = requireContext().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
         return sharedPreferences.getString("userId", "") ?: ""
     }
-
+    //Função que obtém as notas salvas nas SharedPreferences.
     private fun getSavedNotes(): String {
         val sharedPreferences = requireContext().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
         return sharedPreferences.getString("notes", "") ?: ""
     }
-
+    //Função que configura os ouvintes de botões e carrega as notas salvas na interface do fragmento.
     private fun setupButtonListeners(view: View) {
         val userId = getSavedUserId()
         val savedNotes = getSavedNotes()
@@ -68,7 +68,7 @@ class CriarNotas : Fragment() {
             editarTexto.text.clear()
         }
     }
-
+    //Função que atualiza as notas do utilizador no backend.
     private fun updateNotes(userId: String) {
         val editarTexto = view?.findViewById<EditText>(R.id.novaNota)
         val textoNota = editarTexto?.text.toString()
@@ -94,7 +94,7 @@ class CriarNotas : Fragment() {
             }
         })
     }
-
+    //Função que obtém as notas do utilizador a partir do backend.
     private fun getNotes(userId: String) {
         // val userId = getSavedUserId()
 
@@ -128,7 +128,6 @@ class CriarNotas : Fragment() {
                                     }
                                 }
 
-
                                 // Converte a lista de strings em uma string separada por algum caractere, por exemplo, vírgula
                                 val notesString = notasStrings.joinToString()
 
@@ -142,10 +141,7 @@ class CriarNotas : Fragment() {
                                 transaction.addToBackStack(null)
                                 transaction.commit()
                             } else {
-                                // O usuário não tem notas
-                                Log.e("Notas", "O usuário não tem notas")
-                                // Aqui você pode decidir o que fazer quando o usuário não tem notas
-                                // Por exemplo, exibir uma mensagem ou realizar alguma outra ação
+                                Log.e("Notas", "O utilizador não tem notas")
                             }
                         } else {
                             Log.e("Erro", "Resposta nula.")
@@ -172,10 +168,5 @@ class CriarNotas : Fragment() {
         val editor = sharedPreferences.edit()
         editor.putString("notes", notesString)
         editor.apply()
-    }
-
-
-    private fun notesToString(notes: List<Note>): String {
-        return notes.joinToString { it.toString() }
     }
 }

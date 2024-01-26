@@ -1,3 +1,5 @@
+
+
 import android.Manifest
 import android.app.Activity
 import android.content.Context
@@ -17,7 +19,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
-
 import ipt.dam2324.tasktracker.R
 import ipt.dam2324.tasktracker.databinding.FragmentPerfilBinding
 import ipt.dam2324.tasktracker.model.Note
@@ -185,7 +186,7 @@ class Perfil : Fragment(R.layout.fragment_perfil) {
             takePhoto()
         }
     }
-
+    //Função responsável por atualizar a nota na API com uma imagem.
     private fun imagem(userId: String) {
         val imagem = currentPhotoPath
         val nota = Note(null, null, null, imagem)
@@ -210,6 +211,7 @@ class Perfil : Fragment(R.layout.fragment_perfil) {
         })
     }
 
+    //Função responsável por obter a imagem associada à nota do usuário na API e exibi-la em um ImageView.
     private fun getImage(userId: String) {
         // Verifica se o userId é válido
         if (userId.isNotEmpty()) {
@@ -273,6 +275,7 @@ class Perfil : Fragment(R.layout.fragment_perfil) {
         }
     }
 
+    //Função responsável por obter o identificador único do usuário salvo nas SharedPreferences.
     private fun getSavedUserId(): String {
         val savedUserId = sharedPreferences.getString("userId", "")
         return if (savedUserId.isNullOrEmpty()) {
@@ -285,9 +288,4 @@ class Perfil : Fragment(R.layout.fragment_perfil) {
         }
     }
 
-    private fun saveNotesToSharedPreferences(notesString: String) {
-        val editor = sharedPreferences.edit()
-        editor.putString("notes", notesString)
-        editor.apply()
-    }
 }

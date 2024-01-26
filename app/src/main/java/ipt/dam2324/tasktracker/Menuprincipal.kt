@@ -1,4 +1,5 @@
 package ipt.dam2324.tasktracker
+
 import BlocoNotas
 import Perfil
 import android.content.Context
@@ -12,12 +13,11 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-
+import com.google.android.material.navigation.NavigationView
+import ipt.dam2324.tasktracker.databinding.ActivityMenuprincipalBinding
 import ipt.dam2324.tasktracker.model.Note
 import ipt.dam2324.tasktracker.model.NoteResponse
 import ipt.dam2324.tasktracker.retrofit.RetrofitInitializer
-import com.google.android.material.navigation.NavigationView
-import ipt.dam2324.tasktracker.databinding.ActivityMenuprincipalBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -45,7 +45,7 @@ class Menuprincipal : TesteMenu() {
         }
 
     }
-
+    //Função que configura os ouvintes de clique para os botões da interface do utilizador.
     private fun setupButtonListeners() {
         val buttonCriadores = findViewById<Button>(R.id.vamosver)
         val buttonPerfil = findViewById<Button>(R.id.perfil)
@@ -74,7 +74,7 @@ class Menuprincipal : TesteMenu() {
            // Remova os parênteses se BlocoNotas é uma classe ou objeto
         }
     }
-
+    //Função que abre a fragmento vamosver
     private fun abrirCriadores(fragment: vamosver) {
         val balanceViewFragment = fragment
         supportFragmentManager.beginTransaction()
@@ -82,20 +82,21 @@ class Menuprincipal : TesteMenu() {
             .commit()
     }
 
+    //Função que abre a fragmento Perfil
     private fun abrirPerfil(fragment: Perfil) {
         val balanceViewFragment = fragment
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, balanceViewFragment)
             .commit()
     }
-
+    //Função que abre a fragmento Sobre
     private fun abrirSobre(fragment: Sobre) {
         val balanceViewFragment = fragment
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, balanceViewFragment)
             .commit()
     }
-
+    //Função que abre a fragmento BlocoNotas
     private fun abrirBnotas(fragment: BlocoNotas) {
         val balanceViewFragment = fragment
         supportFragmentManager.beginTransaction()
@@ -104,8 +105,9 @@ class Menuprincipal : TesteMenu() {
 
     }
 
+    //Função responsável por configurar e abrir o drawer (menu lateral).
     private fun abrirDrawerBtn() {
-        drawerLayout = findViewById(R.id.drawer_layout)  // Substitua "seu_id_do_drawer_layout" pelo ID do seu DrawerLayout
+        drawerLayout = findViewById(R.id.drawer_layout)
 
         val btnMenuDrawer = findViewById<ImageButton>(R.id.btnMenuDrawer)
         btnMenuDrawer.setOnClickListener {
@@ -123,7 +125,7 @@ class Menuprincipal : TesteMenu() {
         toggle.syncState()  // Adicione essa linha para sincronizar o estado do toggle
     }
 
-
+    //Função responsável por obter as notas do usuário a partir da API.
     private fun getNotes(userId: String) {
        // val userId = getSavedUserId()
 
@@ -206,16 +208,10 @@ class Menuprincipal : TesteMenu() {
         editor.apply()
     }
 
-
-
-
+    //Função responsável por recuperar o identificador único do utilizador salvo nas SharedPreferences.
     private fun getSavedUserId(): String {
         val sharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
         return sharedPreferences.getString("userId", "") ?: ""
     }
-
-
-
-
 
 }

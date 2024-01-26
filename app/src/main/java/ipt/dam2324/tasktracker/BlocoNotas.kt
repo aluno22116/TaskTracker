@@ -6,17 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import ipt.dam2324.tasktracker.CriarNotas
-
 import ipt.dam2324.tasktracker.R
-
 import ipt.dam2324.tasktracker.databinding.FragmentBloconotasBinding
-import ipt.dam2324.tasktracker.model.Note
-
 
 /**
- * A simple [Fragment] subclass.
- * Use the [BlocoNotas.newInstance] factory method to
- * create an instance of this fragment.
+ * Uma [Fragment] simples.
+ * Utilize o método de fábrica [BlocoNotas.newInstance]
+ * para criar uma instância deste fragmento.
  */
 class BlocoNotas : Fragment() {
     private lateinit var binding: FragmentBloconotasBinding
@@ -25,53 +21,24 @@ class BlocoNotas : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Use o layout inflater apropriado para o fragmento BlocoNotas
+        // Utiliza o inflater de layout apropriado para o fragmento BlocoNotas
         binding = FragmentBloconotasBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        // Configura os ouvintes dos botões
         setupButtonListeners()
-
-
     }
 
-
-
-
-
-    // Função para converter a lista de notas em uma string
-    private fun notesToString(notes: List<Note>): String {
-        // Converte a lista de notas em uma string separada por algum caractere, por exemplo, vírgula
-        return notes.joinToString { it.toString() }
-    }
-
-    // Função para salvar a string na SharedPreferences
-    private fun saveNotesToSharedPreferences(notesString: String) {
-        val sharedPreferences = requireActivity().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.putString("notes", notesString)
-        editor.apply()
-    }
-
-    private fun getSavedUserId(): String {
-        val sharedPreferences = requireActivity().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
-        return sharedPreferences.getString("userId", "") ?: ""
-    }
-
-    private fun handleMenuItemClick(itemId: Int): Boolean {
-        // Implemente a lógica para lidar com os itens do menu de navegação, se necessário
-        return true
-    }
-
+    // Obtém as notas guardadas em formato de string das SharedPreferences
     private fun getSavedNotes(): String {
         val sharedPreferences = requireActivity().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
         return sharedPreferences.getString("notes", "") ?: ""
     }
 
-
+    // Abre a tela de criação de notas (CriarNotas)
     private fun abrirCriarNotas() {
         val balanceViewFragment = CriarNotas()
         requireActivity().supportFragmentManager.beginTransaction()
@@ -79,9 +46,10 @@ class BlocoNotas : Fragment() {
             .commit()
     }
 
+    // Configura os ouvintes dos botões
     private fun setupButtonListeners() {
         val btnIrCriarNotas = binding.btnCreateNoteFromView
-        // Carrega as notas da SharedPreferences e exibe na TextView
+        // Carrega as notas das SharedPreferences e exibe na TextView
         val notesString = getSavedNotes()
         binding.textViewNotes.text = notesString
         btnIrCriarNotas.setOnClickListener {

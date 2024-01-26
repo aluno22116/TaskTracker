@@ -16,8 +16,9 @@
         app:headerLayout="@layout/header"
         app:menu="@menu/main_menu"
         android:id="@+id/nav_view"
-        android:layout_gravity="start"
-        android:visibility="visible"/>
+        android:visibility="visible"
+        android:layout_gravity="end"
+        android:fitsSystemWindows="true"/>
 
 
 </androidx.drawerlayout.widget.DrawerLayout>

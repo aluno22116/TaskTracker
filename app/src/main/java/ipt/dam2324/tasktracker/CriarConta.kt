@@ -10,7 +10,6 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-
 import ipt.dam2324.tasktracker.model.Note
 import ipt.dam2324.tasktracker.model.NoteRequest
 import ipt.dam2324.tasktracker.model.User
@@ -21,6 +20,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+//Classe responsável pela atividade de criação de conta.
 class CriarConta : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,6 +38,7 @@ class CriarConta : AppCompatActivity() {
         }
     }
 
+    //Função responsável por processar a criação de uma nova conta de utilizador.
     private fun processarCriarConta() {
         val editTextNome = findViewById<EditText>(R.id.editTextNome)
         val editTextApelido = findViewById<EditText>(R.id.editTextApelido)
@@ -70,6 +71,7 @@ class CriarConta : AppCompatActivity() {
         }
     }
 
+    //Função responsável por fazer a chamada à API para verificar se um determinado username já existe.
     private fun getUsersApi(username: String, note: NoteRequest, user: UserRequest) {
         val call = RetrofitInitializer().service().getUsers("Bearer Tostas")
         call.enqueue(object : Callback<UserResponse> {
@@ -84,7 +86,6 @@ class CriarConta : AppCompatActivity() {
                         } else {
                             userNotes(note, user)
                             // Usuário não existe, prossegue com o registo
-                            // realizarRegisto(user)
                         }
                     } else {
                         Log.e("Erro", "Lista de usuários nula.")
@@ -101,32 +102,26 @@ class CriarConta : AppCompatActivity() {
         })
     }
 
+    //Função responsável por efetuar a chamada à API para criar um espaço de notas para um utilizador.
     private fun userNotes(note: NoteRequest, user: UserRequest) {
-        // API call to add user notes
         val notesCall = RetrofitInitializer().service().createNoteSpace("Bearer Tostas", note)
         notesCall.enqueue(object : Callback<NoteRequest> {
             override fun onResponse(call: Call<NoteRequest>, response: Response<NoteRequest>) {
                 if (response.isSuccessful) {
-                    // Continue with the registration process or any other logic
-                    // Now, make another API call to add the user to a different worksheet
                     realizarRegisto(user)
                 } else {
                     Log.e("Erro", "Erro na chamada à API de notas: ${response.message()}")
-                    // Handle the error as needed
                 }
             }
 
             override fun onFailure(call: Call<NoteRequest>, t: Throwable) {
                 t.printStackTrace()
                 Log.e("Erro", "Erro na chamada à API de notas: ${t.message}")
-                // Handle the error as needed
             }
         })
     }
 
-
-
-
+    //Função responsável por realizar o registo do utilizador através de uma chamada à API.
     private fun realizarRegisto(user: UserRequest) {
         val call = RetrofitInitializer().service().addUser("Bearer Tostas", user)
         call.enqueue(object : Callback<UserRequest?> {
@@ -164,6 +159,7 @@ class CriarConta : AppCompatActivity() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }
+    //Função responsável por validar o formato de um endereço de e-mail
     private fun validaEmail(email: String): Boolean {
         val emailRegex = Regex("[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")
         return emailRegex.matches(email)

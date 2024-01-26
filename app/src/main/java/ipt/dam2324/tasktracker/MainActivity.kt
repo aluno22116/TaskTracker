@@ -14,7 +14,6 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-
 import ipt.dam2324.tasktracker.model.UserResponse
 import ipt.dam2324.tasktracker.retrofit.RetrofitInitializer
 import retrofit2.Call
@@ -28,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setupButtonListeners()
     }
-
+    //Função que configura os ouvintes de botões na tela de login.
     private fun setupButtonListeners() {
         val buttonIrMP = findViewById<Button>(R.id.btnIrParaMenuprincipal)
         val signupButton = findViewById<Button>(R.id.signupButton)
@@ -51,7 +50,7 @@ class MainActivity : AppCompatActivity() {
 
         }
     }
-
+    //Função que exibe temporariamente uma imagem com animações.
     private fun exibirImagemTemporariamente(button: View, onComplete: () -> Unit) {
         val imagemExibida = findViewById<ImageView>(R.id.lapis)
 
@@ -91,7 +90,7 @@ class MainActivity : AppCompatActivity() {
         val intent2 = Intent(this@MainActivity, CriarConta::class.java)
         startActivity(intent2)
     }
-
+    //Função que realiza a autenticação do utilizador utilizando JWT.
     private fun loginJWT() {
         val editTextUsername = findViewById<EditText>(R.id.usernameEditText)
         val editTextPassword = findViewById<EditText>(R.id.passwordEditText)
@@ -109,7 +108,7 @@ class MainActivity : AppCompatActivity() {
             Log.e("Erro", "EditTexts não inicializados corretamente.")
         }
     }
-
+    //Função que realiza uma chamada à API para obter a lista de utilizadores.
     private fun getUsersApi(username: String, password: String) {
         val call = RetrofitInitializer().service().getUsers("Bearer Tostas")
         call.enqueue(object : Callback<UserResponse> {
@@ -160,6 +159,7 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
+    //Função que salva as informações do utilizador nas SharedPreferences.
     private fun saveUserIdToSharedPreferences(userId: String, nome: String, username: String, email: String) {
         val sharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
@@ -170,6 +170,8 @@ class MainActivity : AppCompatActivity() {
         editor.apply()
 
     }
+
+    //Função que limpa os campos de entrada de texto (EditText) nos quais o utilizador insere o nome de utilizador e a palavra-passe.
     private fun limparCamposInput() {
         val editTextUsername = findViewById<EditText>(R.id.usernameEditText)
         val editTextPassword = findViewById<EditText>(R.id.passwordEditText)

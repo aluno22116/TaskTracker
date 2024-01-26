@@ -28,7 +28,7 @@ class SplashScreen : AppCompatActivity() {
             animateText()
         }, delayMillis)
     }
-
+    //Função responsável por animar a exibição de texto em algum componente de interface do utilizador.
     private fun animateText() {
         runOnUiThread {
             if (currentIndex < textToDisplay.length) {
@@ -46,6 +46,7 @@ class SplashScreen : AppCompatActivity() {
         }
     }
 
+    //Função responsável por iniciar a próxima atividade (MainActivity).
     private fun startNextActivity() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)

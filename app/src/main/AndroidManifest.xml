@@ -9,7 +9,9 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
 
+    <!-- Declaração da feature da câmera -->
     <uses-feature android:name="android.hardware.camera" />
+
 
     <application
         android:allowBackup="true"
@@ -22,7 +24,7 @@
         android:theme="@style/Theme.Trabalhofinal"
         tools:targetApi="34">
 
-
+        <!-- Configuração do FileProvider para manipulação de arquivos -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="ipt.dam2324.tasktracker.fileprovider"
@@ -32,7 +34,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-
+        <!--  Atividades do aplicativo -->
         <activity
             android:name="ipt.dam2324.tasktracker.TesteMenu"
             android:exported="false"
