@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".vamosver"
+    tools:context="ipt.dam2324.tasktracker.vamosver"
     android:background="#002A40">
 
     <androidx.constraintlayout.widget.ConstraintLayout

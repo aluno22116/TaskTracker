@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CriarConta"
+    tools:context="ipt.dam2324.tasktracker.CriarConta"
     android:background="#002A40"
     android:statusBarColor="@color/black">
 

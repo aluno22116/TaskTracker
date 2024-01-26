@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.trabalhofinal"
+    namespace = "ipt.dam2324.tasktracker"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.trabalhofinal"
+        applicationId = "ipt.dam2324.tasktracker"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
