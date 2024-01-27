@@ -52,6 +52,7 @@ class Menuprincipal : TesteMenu() {
         val buttonPerfil = findViewById<Button>(R.id.perfil)
         val buttonBNotas = findViewById<Button>(R.id.notas)
         val buttonSobre = findViewById<Button>(R.id.sobre)
+        val buttonUtilizadores = findViewById<Button>(R.id.Utilizadores)
 
         buttonCriadores.setOnClickListener {
             it.startAnimation(AnimationUtils.loadAnimation(this, R.anim.button_click_animation))
@@ -67,6 +68,13 @@ class Menuprincipal : TesteMenu() {
             it.startAnimation(AnimationUtils.loadAnimation(this, R.anim.button_click_animation))
             abrirSobre(Sobre())  // Remova os parênteses se Perfil é uma classe ou objeto
         }
+
+        buttonUtilizadores.setOnClickListener {
+            it.startAnimation(AnimationUtils.loadAnimation(this, R.anim.button_click_animation))
+            abrirUtilizadores(Utilizadores())  // Remova os parênteses se Perfil é uma classe ou objeto
+        }
+
+
 
         buttonBNotas.setOnClickListener {
             it.startAnimation(AnimationUtils.loadAnimation(this, R.anim.button_click_animation))
@@ -221,7 +229,7 @@ class Menuprincipal : TesteMenu() {
         val sharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
         return sharedPreferences.getString("userId", "") ?: ""
     }
-    fun mostrarBotao(){
+    fun esconderBotao(){
         val meuBotao = findViewById<Button>(R.id.Utilizadores)
         meuBotao.visibility = View.GONE
     }
