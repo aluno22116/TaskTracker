@@ -6,6 +6,7 @@ import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.ImageButton
@@ -103,6 +104,13 @@ class Menuprincipal : TesteMenu() {
             .replace(R.id.fragment_container, balanceViewFragment)
             .commit()
 
+    }
+
+    private fun abrirUtilizadores(fragment: Utilizadores) {
+        val balanceViewFragment = fragment
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, balanceViewFragment)
+            .commit()
     }
 
     //Função responsável por configurar e abrir o drawer (menu lateral).
@@ -212,6 +220,10 @@ class Menuprincipal : TesteMenu() {
     private fun getSavedUserId(): String {
         val sharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
         return sharedPreferences.getString("userId", "") ?: ""
+    }
+    fun mostrarBotao(){
+        val meuBotao = findViewById<Button>(R.id.Utilizadores)
+        meuBotao.visibility = View.GONE
     }
 
 }
