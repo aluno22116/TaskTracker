@@ -23,7 +23,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class Menuprincipal : TesteMenu() {
+public class Menuprincipal : TesteMenu() {
 
     private lateinit var binding: ActivityMenuprincipalBinding
     private lateinit var drawerLayout: DrawerLayout  // Adicione essa linha para definir o DrawerLayout
@@ -36,6 +36,13 @@ class Menuprincipal : TesteMenu() {
 
         binding = ActivityMenuprincipalBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val sharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        val username = sharedPreferences.getString("username","")
+
+        if(username != "admin"){
+            esconderBotao()
+        }
 
         setupButtonListeners()
         abrirDrawerBtn()

@@ -20,8 +20,10 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+
 class MainActivity : AppCompatActivity() {
 
+    private val mp = Menuprincipal()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -130,7 +132,16 @@ class MainActivity : AppCompatActivity() {
                                 // Salvar userId no SharedPreferences
                                 saveUserIdToSharedPreferences(userId, nome, username, email)
                                 // Usuário encontrado, faça o que precisa aqui
+
+                                if (username == "admin"){
+                                   // mostrarFragmento()
+                                    Log.e("ADMIN!!", "ENTRASTE COM ADMIN $username")
+                                    val intent1 = Intent(this@MainActivity, Menuprincipal::class.java)
+                                    startActivity(intent1)
+                                }
+
                                 Log.i("INFO", "Usuário encontrado: $matchedUser")
+
                                 val intent1 = Intent(this@MainActivity, Menuprincipal::class.java)
                                 //  val intent2 = Intent(this@MainActivity, CriarNotas::class.java)
                                 //  intent2.putExtra("userId", userId)
