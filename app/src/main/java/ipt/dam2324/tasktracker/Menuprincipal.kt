@@ -15,9 +15,11 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
+import com.google.gson.Gson
 import ipt.dam2324.tasktracker.databinding.ActivityMenuprincipalBinding
 import ipt.dam2324.tasktracker.model.Note
 import ipt.dam2324.tasktracker.model.NoteResponse
+import ipt.dam2324.tasktracker.model.UserResponse
 import ipt.dam2324.tasktracker.retrofit.RetrofitInitializer
 import retrofit2.Call
 import retrofit2.Callback
@@ -78,7 +80,8 @@ public class Menuprincipal : TesteMenu() {
 
         buttonUtilizadores.setOnClickListener {
             it.startAnimation(AnimationUtils.loadAnimation(this, R.anim.button_click_animation))
-            abrirUtilizadores(Utilizadores())  // Remova os parênteses se Perfil é uma classe ou objeto
+            getUsers()
+            //abrirUtilizadores(Utilizadores())  // Remova os parênteses se Perfil é uma classe ou objeto
         }
 
 
@@ -239,6 +242,57 @@ public class Menuprincipal : TesteMenu() {
     fun esconderBotao(){
         val meuBotao = findViewById<Button>(R.id.Utilizadores)
         meuBotao.visibility = View.GONE
+    }
+
+
+    private fun getUsers(){
+
+        val call = RetrofitInitializer().service().getUsers("Bearer Tostas")
+        call.enqueue(object : Callback<UserResponse>{
+            override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
+
+                if (response.isSuccessful){
+                    val users = response.body()?.users
+                    val usersStrings = mutableListOf<String>()
+                    if (users != null){
+
+                        // Itera sobre a lista de notas e obtém o parâmetro 'notas'
+                        for (user in users) {
+
+                                val util = user.username
+                                if (util != null) {
+                                    usersStrings.add(util)
+                                }
+                            }
+
+                        val usernamesJson = Gson().toJson(usersStrings)
+
+                        // Converte a lista de strings em uma string separada por algum caractere, por exemplo, vírgula
+                        val usersStrings = usersStrings.joinToString()
+
+                        // Salva a string na SharedPreferences
+                        saveUsersToSharedPreferences(usernamesJson)
+                        abrirUtilizadores(Utilizadores())
+                        }
+
+                    }
+                }
+
+
+            override fun onFailure(call: Call<UserResponse>, t: Throwable) {
+                t.printStackTrace()
+                Log.e("Erro", "Erro na buscapor users: ${t.message}")
+            }
+
+        })
+    }
+
+    private fun saveUsersToSharedPreferences(usernamesJson: String) {
+        val sharedPreferences =  getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        sharedPreferences.edit().putString("users", usernamesJson).apply()
+      // val editor = sharedPreferences.edit()
+      // editor.putString("users", usernamesJson)
+      // editor.apply()
     }
 
 }
