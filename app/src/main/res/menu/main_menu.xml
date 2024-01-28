@@ -31,9 +31,15 @@
             />
 
         <item
-
             android:id="@+id/btnFechar"
             android:title="Terminar Sessão"
             android:icon="@drawable/baseline_logout_24"/>
+
+        <item
+            android:id="@+id/btnUtilizadoress"
+            android:title="Utilizadores"
+            android:icon="@drawable/outline_admin_panel_settings_24"/>
+
+
 </group>
 </menu>

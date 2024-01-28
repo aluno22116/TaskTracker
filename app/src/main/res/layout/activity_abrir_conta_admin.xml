@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ipt.dam2324.tasktracker.CriarConta"
+    tools:context="ipt.dam2324.tasktracker.AbrirContaAdmin"
     android:background="#002A40"
     android:statusBarColor="@color/black">
 
@@ -14,9 +14,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="serif"
-        android:text="Registo"
+        android:text="Registo Admin"
         android:textColor="@color/white"
-        android:textSize="40dp"
+        android:textSize="45dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -25,7 +25,7 @@
         app:layout_constraintVertical_bias="0.115" />
 
     <EditText
-        android:id="@+id/editTextNome"
+        android:id="@+id/editTextNomeAdmin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/input_bg"
@@ -44,10 +44,10 @@
         app:layout_constraintVertical_bias="0.305" />
 
     <EditText
-        android:id="@+id/editTextApelido"
+        android:id="@+id/editTextApelidoAdmin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/editTextNome"
+        android:layout_below="@id/editTextNomeAdmin"
         android:background="@drawable/input_bg"
         android:hint="Apelido"
         android:inputType="text"
@@ -65,10 +65,10 @@
         app:layout_constraintVertical_bias="0.409" />
 
     <EditText
-        android:id="@+id/editTextUsername"
+        android:id="@+id/editTextUsernameAdmin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/editTextApelido"
+        android:layout_below="@id/editTextApelidoAdmin"
         android:background="@drawable/input_bg"
         android:hint="Username"
         android:inputType="text"
@@ -86,10 +86,10 @@
         app:layout_constraintVertical_bias="0.499" />
 
     <EditText
-        android:id="@+id/editTextEmail"
+        android:id="@+id/editTextEmailAdmin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/editTextUsername"
+        android:layout_below="@id/editTextUsernameAdmin"
         android:background="@drawable/input_bg"
         android:hint="Email"
         android:inputType="textEmailAddress"
@@ -107,10 +107,10 @@
         app:layout_constraintVertical_bias="0.593" />
 
     <EditText
-        android:id="@+id/editTextPassword"
+        android:id="@+id/editTextPasswordAdmin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/editTextEmail"
+        android:layout_below="@id/editTextEmailAdmin"
         android:background="@drawable/input_bg"
         android:hint="Password"
         android:inputType="textPassword"
@@ -128,10 +128,10 @@
         app:layout_constraintVertical_bias="0.695" />
 
     <Button
-        android:id="@+id/btnCriarContaFinal"
+        android:id="@+id/btnCriarContaAdmin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/editTextPassword"
+        android:layout_below="@id/editTextPasswordAdmin"
         android:backgroundTint="#0087CC"
         android:text="Criar Conta"
         android:textColor="@color/white"

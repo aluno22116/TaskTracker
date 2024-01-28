@@ -85,7 +85,6 @@ public class Menuprincipal : TesteMenu() {
         }
 
 
-
         buttonBNotas.setOnClickListener {
             it.startAnimation(AnimationUtils.loadAnimation(this, R.anim.button_click_animation))
             val userId = getSavedUserId()
@@ -242,6 +241,9 @@ public class Menuprincipal : TesteMenu() {
     fun esconderBotao(){
         val meuBotao = findViewById<Button>(R.id.Utilizadores)
         meuBotao.visibility = View.GONE
+        val navigationView = findViewById<NavigationView>(R.id.nav_view)
+        val meuBotao2 = navigationView.menu.findItem(R.id.btnUtilizadoress)
+        meuBotao2.isVisible = false
     }
 
 

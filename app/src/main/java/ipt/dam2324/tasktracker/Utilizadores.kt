@@ -1,6 +1,7 @@
 package ipt.dam2324.tasktracker
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,7 +15,6 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import ipt.dam2324.tasktracker.model.NoteRequest
-import ipt.dam2324.tasktracker.model.User
 import ipt.dam2324.tasktracker.model.UserRequest
 import ipt.dam2324.tasktracker.model.UserResponse
 import ipt.dam2324.tasktracker.retrofit.RetrofitInitializer
@@ -63,10 +63,13 @@ class Utilizadores : Fragment() {
             getUsers()
         }
 
+        val buttonDelUser = view.findViewById<Button>(R.id.buttonDelUser)
         val buttonAddUser = view.findViewById<Button>(R.id.buttonAddUser)
-
-        // Adicionar um clique ao botão para deletar o usuário (necessário obter o ID do usuário)
         buttonAddUser.setOnClickListener {
+            abrirUltimo()
+        }
+        // Adicionar um clique ao botão para deletar o usuário (necessário obter o ID do usuário)
+        buttonDelUser.setOnClickListener {
             Log.e("teste","O BOTAO FOI CLICADO")
             delUser(userId)
         }
@@ -185,7 +188,10 @@ class Utilizadores : Fragment() {
         val sharedPreferences = requireActivity().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
         sharedPreferences.edit().putString("users", usernamesJson).apply()
     }
-
+    private fun abrirUltimo(){
+        val intent = Intent(requireContext(), AbrirContaAdmin::class.java)
+        startActivity(intent)
+    }
     companion object {
         @JvmStatic
         fun newInstance() =

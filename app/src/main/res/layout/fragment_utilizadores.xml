@@ -27,8 +27,22 @@
             android:id="@+id/buttonAddUser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="550dp"
+            android:layout_marginTop="500dp"
             android:text="Adicionar Utilizador"
+            android:textColor="@color/white"
+            android:backgroundTint="#0087CC"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <Button
+            android:id="@+id/buttonDelUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="600dp"
+            android:text="Eliminar Utilizador"
             android:textColor="@color/white"
             android:backgroundTint="#0087CC"
             app:layout_constraintBottom_toBottomOf="parent"

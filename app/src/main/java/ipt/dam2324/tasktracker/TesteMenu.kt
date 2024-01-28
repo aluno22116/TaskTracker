@@ -80,16 +80,25 @@ import retrofit2.Response
                  return true
              }
 
+             R.id.btnUtilizadoress -> {
+                 val fragment = Utilizadores()
+                 abrirFragmento(fragment)
+                 return true
+             }
+
              R.id.btnFechar -> {
+
                  Handler().postDelayed({
+                     finish()
                      // Encerra a Menuprincipal
-                     val intentMenuprincipal = Intent(this, Menuprincipal::class.java)
+                     val intentMenuprincipal = Intent(this, MainActivity::class.java)
+
                      intentMenuprincipal.flags =
-                         Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                        Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
                      startActivity(intentMenuprincipal)
 
                      // Encerra a atividade atual (TesteMenu)
-                     finish()
+
 
                  }, 500)
                  return true
