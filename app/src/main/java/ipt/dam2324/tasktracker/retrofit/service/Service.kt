@@ -5,6 +5,7 @@ import ipt.dam2324.tasktracker.model.UserRequest
 import ipt.dam2324.tasktracker.model.UserResponse
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
@@ -19,7 +20,6 @@ interface Service {
     @GET("notes")
     fun getNotes(@Header("Authorization") authorization: String, @Query("userId") userId: String): Call<NoteResponse>
 
-
     @POST("users")
     fun addUser(@Header("Authorization") token: String, @Body user: UserRequest): Call<UserRequest>
 
@@ -29,5 +29,9 @@ interface Service {
     @PUT("notes/{userId}")
     fun updateNote(@Header("Authorization") token: String, @Path("userId") userId: String?, @Body updatedNote: NoteRequest): Call<NoteRequest>
 
+    @DELETE("users/{userId}")
+    fun deleteUser(@Header("Authorization") token: String, @Path("userId") userId: String?): Call<UserRequest>
 
+    @DELETE("notes/{userId}")
+    fun deleteNotes(@Header("Authorization") token: String, @Path("userId") userId: String?): Call<NoteRequest>
 }
